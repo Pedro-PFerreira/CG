@@ -1,6 +1,6 @@
 # CG 2022/2023
 
-## Group T0xG0y
+## Group T01G01
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
 | Pedro Manuel Costa Aguiar Botelho Gomes  | 202006086 | up202006086@fe.up.pt    |
