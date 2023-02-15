@@ -3,7 +3,7 @@
 ## Group T0xG0y
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
-| John Doe         | 201901010 | ...                |
+| Pedro Manuel Costa Aguiar Botelho Gomes  | 202006086 | up202006086@fe.up.pt    |
 | Jane Doe         | 201901011 | ...                |
 
 ----
