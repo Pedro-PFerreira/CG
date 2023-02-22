@@ -4,6 +4,7 @@ import { MyParallelogram } from "./MyParallelogram.js";
 import { MyTriangle } from "./MyTriangle.js";
 import { MyTriangleSmall } from "./MyTriangleSmall.js";
 import { MyTriangleBig } from "./MyTriangleBig.js";
+import { MyTangram } from "./MyTangram.js";
 
 /**
  * MyScene
@@ -29,22 +30,23 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-    this.diamond = new MyDiamond(this);
+    /*this.diamond = new MyDiamond(this);
     this.triangle = new MyTriangle(this);
     this.parallelogram = new MyParallelogram(this);
     this.triangle_small = new MyTriangleSmall(this);
-    this.triangle_big = new MyTriangleBig(this);
+    this.triangle_big = new MyTriangleBig(this);*/
+    this.tangram = new MyTangram(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
 
-    this.displayDiamond = true;
-    this.displayTriangle = true;
-    this.displayParallelogram = true;
+    /*this.displayDiamond = true;
+    this.displayTriangle = false;
+    this.displayParallelogram = false;
 
-    this.displayTriangleSmall = true;
-    this.displayTriangleBig = true;
+    this.displayTriangleSmall = false;
+    this.displayTriangleBig = false;*/
 
   }
   initLights() {
@@ -103,10 +105,20 @@ export class MyScene extends CGFscene {
       1.0,
     ];
 
+    var rotate = [
+      Math.cos(15), - Math.sin(15), 0, 0,
+      Math.sin(15), Math.cos(15), 0, 0,
+      0, 0, 1, 0,
+      0, 0, 1, 1
+    ];
+
     this.multMatrix(sca);
 
     // ---- BEGIN Primitive drawing section
-    if (this.displayDiamond) this.diamond.display();
+
+    this.tangram.display();
+    
+    /*if (this.displayDiamond) this.diamond.display();
 
     if (this.displayTriangle) this.triangle.display();
 
@@ -114,7 +126,7 @@ export class MyScene extends CGFscene {
 
     if (this.displayTriangleSmall) this.triangle_small.display();
 
-    if (this.displayTriangleBig) this.triangle_big.display();
+    if (this.displayTriangleBig) this.triangle_big.display();*/
 
     // ---- END Primitive drawing section
   }
