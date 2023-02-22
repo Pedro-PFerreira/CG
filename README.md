@@ -1,10 +1,10 @@
 # CG 2022/2023
 
-## Group T0xG0y
+## Group T01G01
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
-| John Doe         | 201901010 | ...                |
-| Jane Doe         | 201901011 | ...                |
+| Pedro Manuel Costa Aguiar Botelho Gomes  | 202006086 | up202006086@edu.fe.up.pt    |
+| Pedro Pereira Ferreira         | 202004986| 202004986@edu.fe.up.pt                |
 
 ----
 
