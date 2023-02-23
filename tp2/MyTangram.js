@@ -16,6 +16,7 @@ export class MyTangram extends CGFobject {
         //Initialize scene objects
         this.square = new MyDiamond(this.scene);
         this.blueTriangle = new MyTriangleBig(this.scene);
+        this.greenTriangle = new MyTriangleBig(this.scene);
         
     }
     display() {
@@ -41,6 +42,20 @@ export class MyTangram extends CGFobject {
             -0.2, -2.07, 0, 1
             ];
 
+        angle = - 90 * (Math.PI / 180);
+        var translateGreenTriangle = [
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            -0.3, -2.06, 0, 1
+        ]
+        var rotateGreenTriangle = [
+            Math.cos(angle), - Math.sin(angle), 0, 0,
+            Math.sin(angle), Math.cos(angle), 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1
+        ]
+
         this.scene.pushMatrix();
         this.scene.multMatrix(rotateSquare);
         this.scene.multMatrix(translateSquare);
@@ -50,5 +65,12 @@ export class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.multMatrix(translateBlueTriangle);
         this.blueTriangle.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.multMatrix(rotateGreenTriangle);
+        this.scene.multMatrix(translateGreenTriangle);
+        this.greenTriangle.display();
+        this.scene.popMatrix();
      }
 }
