@@ -5,6 +5,7 @@ import { MyTriangle } from "./MyTriangle.js";
 import { MyTriangleSmall } from "./MyTriangleSmall.js";
 import { MyTriangleBig } from "./MyTriangleBig.js";
 import { MyTangram } from "./MyTangram.js";
+import { MyUnitCube } from "./MyUnitCube.js";
 
 /**
  * MyScene
@@ -117,6 +118,8 @@ export class MyScene extends CGFscene {
     // ---- BEGIN Primitive drawing section
 
     this.tangram.display();
+
+    //this.unitCube.display();
     
     /*if (this.displayDiamond) this.diamond.display();
 

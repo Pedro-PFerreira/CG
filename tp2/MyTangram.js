@@ -4,6 +4,7 @@ import { MyTriangle } from "./MyTriangle.js";
 import { MyParallelogram } from "./MyParallelogram.js";
 import { MyTriangleBig } from './MyTriangleBig.js';
 import { MyTriangleSmall } from './MyTriangleSmall.js';
+import { MyUnitCube } from './MyUnitCube.js';
 
 /**
  * MyTangram
@@ -19,9 +20,18 @@ export class MyTangram extends CGFobject {
         this.blueTriangle = new MyTriangleBig(this.scene);
         this.greenTriangle = new MyTriangleBig(this.scene);
         this.lightBlueTriangle = new MyTriangle(this.scene);
-        
+        this.unitCube = new MyUnitCube(this.scene);
     }
+    
     display() {
+        
+        var translateCube = [
+			1, 0, 0, 0,
+			0, 1, 0, 0,
+			0, 0, 1, 0,
+			0, 0, -0.5, 1
+		];
+
         var angle = -20;
         var rotateSquare = [
             Math.cos(angle), - Math.sin(angle), 0, 0,
@@ -87,6 +97,10 @@ export class MyTangram extends CGFobject {
             0, 0, 0, 1
         ]
         
+		this.scene.pushMatrix();
+		this.scene.multMatrix(translateCube);
+		this.unitCube.display();
+		this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.multMatrix(rotateSquare);
