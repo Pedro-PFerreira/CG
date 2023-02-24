@@ -40,6 +40,7 @@ export class MyScene extends CGFscene {
 
     //Objects connected to MyInterface
     this.displayAxis = true;
+    this.displayTangram = false;
     this.scaleFactor = 1;
 
     /*this.displayDiamond = true;
@@ -117,9 +118,7 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    this.tangram.display();
-
-    //this.unitCube.display();
+    if(this.displayTangram) this.tangram.display();
     
     /*if (this.displayDiamond) this.diamond.display();
 
