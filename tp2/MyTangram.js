@@ -28,11 +28,21 @@ export class MyTangram extends CGFobject {
     
     display() {
         
+        
+        var angle = 45 * (Math.PI / 180);
+        var rotateCube = [
+            Math.cos(angle), -Math.sin(angle), 0, 0,
+            Math.sin(angle), Math.cos(angle), 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1
+        ]
+
+
         var translateCube = [
 			1, 0, 0, 0,
 			0, 1, 0, 0,
 			0, 0, 1, 0,
-			0, 0, -0.5, 1
+			0.5, 0, -0.5, 1
 		];
 
         var angle = -20;
@@ -99,12 +109,7 @@ export class MyTangram extends CGFobject {
             0, 0, 1, 0,
             0, 0, 0, 1
         ]
-        
-		this.scene.pushMatrix();
-		this.scene.multMatrix(translateCube);
-		this.unitCube.display();
-		this.scene.popMatrix();
-
+    
         var translateRedTriangle1 = [
             1,0,0,0,
             0,1,0,0,
@@ -174,6 +179,13 @@ export class MyTangram extends CGFobject {
             0,0,1,0,
             0,0,0,1
         ]
+
+
+        this.scene.pushMatrix();
+        this.scene.multMatrix(rotateCube);        
+		this.scene.multMatrix(translateCube);
+		this.unitCube.display();
+		this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.multMatrix(rotateSquare);

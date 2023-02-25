@@ -40,7 +40,7 @@ export class MyScene extends CGFscene {
 
     //Objects connected to MyInterface
     this.displayAxis = true;
-    this.displayTangram = false;
+    this.displayTangram = true;
     this.scaleFactor = 1;
 
     /*this.displayDiamond = true;
@@ -114,11 +114,34 @@ export class MyScene extends CGFscene {
       0, 0, 1, 1
     ];
 
+    var translateTangram = [
+      1, 0, 0, 0,
+      0, 1, 0, 0,
+      0, 0, 1, 0,
+      0, 1, 0, 1,
+    ];
+
+
+    var angle = 90 * (Math.PI / 180);
+    var rotateTangram = [
+      1, 0, 0, 0,
+      0, Math.cos(angle), - Math.sin(angle), 0,
+      0, Math.sin(angle), Math.cos(angle), 0,
+      0, 0, 0, 1
+    ];
+
+
     this.multMatrix(sca);
 
     // ---- BEGIN Primitive drawing section
 
-    if(this.displayTangram) this.tangram.display();
+ 
+    this.pushMatrix();
+    this.multMatrix(translateTangram);
+    this.multMatrix(rotateTangram);
+    this.tangram.display();
+    this.popMatrix();
+    
     
     /*if (this.displayDiamond) this.diamond.display();
 
