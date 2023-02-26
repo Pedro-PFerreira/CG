@@ -4,7 +4,7 @@
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
 | Pedro Manuel Costa Aguiar Botelho Gomes  | 202006086 | up202006086@edu.fe.up.pt    |
-| Pedro Pereira Ferreira         | 202004986| 202004986@edu.fe.up.pt                |
+| Pedro Pereira Ferreira         | 202004986| up202004986@edu.fe.up.pt                |
 
 ----
 
