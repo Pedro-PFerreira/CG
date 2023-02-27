@@ -25,6 +25,14 @@ export class MyUnitCubeQuad extends CGFobject {
             0,0,1,0,
             0,0,0.5,1
           ]
+        
+        var angle = 180 * (Math.PI / 180);
+        var rotateQuad2 = [
+            Math.cos(angle),0,Math.sin(angle),0,
+            0,1,0,0,
+            -Math.sin(angle),0,Math.cos(angle),0,
+            0,0,0,1
+        ]
 
         var translateQuad2 = [
             1,0,0,0,
@@ -32,6 +40,7 @@ export class MyUnitCubeQuad extends CGFobject {
             0,0,1,0,
             0,0,-0.5,1
           ]
+
         var angle = 90 * (Math.PI / 180);
         var rotateQuad3 = [
             Math.cos(angle),0,Math.sin(angle),0,
@@ -99,6 +108,7 @@ export class MyUnitCubeQuad extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.multMatrix(translateQuad2);
+        this.scene.multMatrix(rotateQuad2);
         this.quad2.display();
         this.scene.popMatrix();
 
