@@ -6,7 +6,7 @@
 
 ### Exercise 2
 
-- The main goal of this exercise was to replicate a tangram figure by our choice. The figure chosen is shown below:
+- The main goal of this exercise was to replicate a tangram figure. The figure is shown below:
 
 ![Figure 1](./screenshots/1.png)
 
