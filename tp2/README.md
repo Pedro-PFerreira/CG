@@ -14,8 +14,6 @@
 
 ![Figure 2](./screenshots/cg-t01g01-tp2-1.png)
 
-Here are some examples of the figures we've created:
-
 ### Exercise 3
 
 - In exercise 3, we had to draw a unitary cube and add it to our tangram. Besides that, we had also to make them parallel to XZ plan.
