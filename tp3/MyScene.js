@@ -2,6 +2,8 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
 import { MyPyramid } from "./MyPyramid.js";
 import { MyCone } from "./MyCone.js";
 import { MyPlane } from "./MyPlane.js";
+import { MyTangram } from "./MyTangram.js";
+import { MyUnitCube } from "./MyUnitCube.js";
 
 /**
 * MyScene
@@ -30,11 +32,13 @@ export class MyScene extends CGFscene {
         this.plane = new MyPlane(this, 5);
         this.cone = new MyCone(this, 3, 1);
         this.pyramid = new MyPyramid(this, 3, 1);
+        this.tangram = new MyTangram(this);
+        this.myUnitCube = new MyUnitCube(this)
         
-        this.objects = [this.plane, this.pyramid, this.cone];
+        this.objects = [this.plane, this.pyramid, this.cone, this.tangram, this.myUnitCube];
 
         // Labels and ID's for object selection on MyInterface
-        this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2};
+        this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, 'Unit Cube': 4};
 
         //Other variables connected to MyInterface
         this.selectedObject = 0;
@@ -43,6 +47,9 @@ export class MyScene extends CGFscene {
         this.displayNormals = false;
         this.objectComplexity = 0.5;
         this.scaleFactor = 2.0;
+        this.lightFactor = 0.3;
+
+        this.enableNormalViz
 
     }
     initLights() {
@@ -61,9 +68,14 @@ export class MyScene extends CGFscene {
         this.lights[1].disable();
         this.lights[1].setVisible(true);
         this.lights[1].update();
+        
     }
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(10, 10, 10), vec3.fromValues(0, 0, 0));
+    }
+
+    updateLights(){
+        this.setGlobalAmbientLight(this.lightFactor, this.lightFactor, this.lightFactor, 1.0);
     }
 
     hexToRgbA(hex)
@@ -155,6 +167,8 @@ export class MyScene extends CGFscene {
         
         this.lights[0].update();
         this.lights[1].update();
+
+        this.updateLights();
 
         // Draw axis
         if (this.displayAxis)
