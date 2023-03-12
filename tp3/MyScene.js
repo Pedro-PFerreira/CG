@@ -49,7 +49,7 @@ export class MyScene extends CGFscene {
         this.scaleFactor = 2.0;
         this.lightFactor = 0.3;
 
-        this.enableNormalViz
+        
 
     }
     initLights() {

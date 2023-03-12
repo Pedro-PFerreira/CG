@@ -190,17 +190,20 @@ export class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.multMatrix(rotateSquare);
         this.scene.multMatrix(translateSquare);
+        this.square.enableNormalViz();
         this.square.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.multMatrix(translateBlueTriangle);
+        this.blueTriangle.enableNormalViz();        
         this.blueTriangle.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.multMatrix(rotateGreenTriangle);
         this.scene.multMatrix(translateGreenTriangle);
+        this.greenTriangle.enableNormalViz();
         this.greenTriangle.display();
         this.scene.popMatrix();
 
@@ -209,6 +212,7 @@ export class MyTangram extends CGFobject {
         this.scene.multMatrix(translateLightBlueTriangle2);
         this.scene.multMatrix(rotateLightBlueTriangle);
         this.scene.multMatrix(translateLightBlueTriangle);
+        this.lightBlueTriangle.enableNormalViz();
         this.lightBlueTriangle.display();
         this.scene.popMatrix();
 
@@ -216,6 +220,7 @@ export class MyTangram extends CGFobject {
         this.scene.multMatrix(translateRedTriangle2);
         this.scene.multMatrix(rotateRedTriangle);
         this.scene.multMatrix(translateRedTriangle1);
+        this.redTriangle.enableNormalViz();
         this.redTriangle.display();
         this.scene.popMatrix();
 
@@ -223,6 +228,7 @@ export class MyTangram extends CGFobject {
         this.scene.multMatrix(translatePurpleTriangle2);
         this.scene.multMatrix(rotatePurpleTriangle);
         this.scene.multMatrix(translatePurpleTriangle1);
+        this.purpleTriangle.enableNormalViz();
         this.purpleTriangle.display();
         this.scene.popMatrix();
 
@@ -231,6 +237,7 @@ export class MyTangram extends CGFobject {
         this.scene.multMatrix(reflectParallelogram);
         this.scene.multMatrix(translateParallelogram1);
         this.scene.multMatrix(rotateParallelogram);
+        this.parallelogram.enableNormalViz();
         this.parallelogram.display();
         this.scene.popMatrix();
      }

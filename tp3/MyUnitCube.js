@@ -24,7 +24,41 @@ export class MyUnitCube extends CGFobject {
             -0.5, 0, 0.5,	//4
             0, 0.5, 0.5,    //5
 			0, -0.5, 0.5,	//6
-			0.5, 0, 0.5	    //7
+			0.5, 0, 0.5,    //7
+
+
+			//Face 3
+
+			0.5, 0, 0.5,
+			0.5, 0, -0.5,
+			0, 0.5, 0.5,
+			0, 0.5, -0.5,
+
+			//Face 4
+			
+			0.5, 0, 0.5,
+			0.5, 0, -0.5,
+			0, -0.5, 0.5,
+			0, -0.5, -0.5,
+
+
+			//Face 5
+
+			-0.5, 0, 0.5,
+			-0.5, 0, -0.5,
+			0, 0.5, 0.5,
+			0, 0.5, -0.5,
+
+
+			//Face 6	
+			0, 0.5, 0.5,
+			0, 0.5, -0.5,
+			0, -0.5, 0.5,
+			0, -0.5, -0.5,
+
+
+			//Pontos que estão na face em x = 0.5
+
 		];
 
 		//Counter-clockwise reference of vertices
@@ -38,8 +72,6 @@ export class MyUnitCube extends CGFobject {
             //Face 2
             2,0,5,
             5,0,4,
-			2,5,0,
-			5,4,0,
             //Face 3
             2,5,3,
             5,7,3,
@@ -52,17 +84,46 @@ export class MyUnitCube extends CGFobject {
             7,1,3,
             //Face 6
             5,4,6,
-            5,6,7,
-			5,6,4,
-			5,7,6
+            5,6,7
 
 		];
 
 		this.normals = [
+			//Face 1
+			0,0,-1,
+			0,0,-1, 
+			0,0,-1,
+			0,0,-1,
+
+			//Face 2
 			0,0,1,
-			0,0,1, 
 			0,0,1,
 			0,0,1,
+			0,0,1,
+
+			//Face 3
+			1,1,0,
+			1,1,0,
+			1,1,0,
+			1,1,0,
+
+			//Face 4
+			1,-1,0,
+			1,-1,0,
+			1,-1,0,
+			1,-1,0,
+
+			//Face 5
+			-1,1,0,
+			-1,1,0,
+			-1,1,0,
+			-1,1,0,
+
+			//Face 6
+			-1,-1,0,
+			-1,-1,0,
+			-1,-1,0,
+			-1,-1,0
 		]
 
 		//The defined indices (and corresponding vertices)
@@ -70,5 +131,7 @@ export class MyUnitCube extends CGFobject {
 		this.primitiveType = this.scene.gl.TRIANGLES;
 
 		this.initGLBuffers();
+
+		this.enableNormalViz();
 	}
 }
