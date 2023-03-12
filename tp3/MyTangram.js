@@ -294,5 +294,10 @@ export class MyTangram extends CGFobject {
         this.yellow.apply();
         this.parallelogram.display();
         this.scene.popMatrix();
-     }
+    }
+
+    updateBuffers(complextity){
+        this.initBuffers();
+        this.initNormalVizBuffers();
+    }
 }
