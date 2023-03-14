@@ -19,36 +19,34 @@ export class MyCylinder extends CGFobject {
         this.indices = [];
         this.normals = [];
 
+        var index = 0;
         var angle = 0;
-        var var_inc = 2*Math.PI/this.slices;
+        var angle_inc = 2*Math.PI/this.slices;
 
         for (var i = 0; i < this.stacks; i++){
-            var normalanglele = var_inc/2;
             for(var j = 0; j < this.slices; j++){
 
-                var height = 1;
+                var height = (1/this.stacks);
 
-                var sin_a=Math.sin(angle);
-                var sin_aa=Math.sin(angle+var_inc);
-                var cos_a=Math.cos(angle);
-                var cos_aa=Math.cos(angle+var_inc);
+                this.vertices.push(Math.cos(angle), Math.sin(angle), (i+1)*height);
+                this.normals.push(Math.cos(angle), Math.sin(angle), 0);
+                this.vertices.push(Math.cos(angle),Math.sin(angle),i*height);
+                this.normals.push(Math.cos(angle),Math.sin(angle),0);
 
-                this.vertices.push(cos_a, sin_a, i*height);
-                this.vertices.push(cos_aa, sin_aa, (i+1)*height);
-                this.vertices.push(cos_a, sin_a, (i+1)*height);
-                this.vertices.push(cos_aa, sin_aa, i*height);
+                angle += angle_inc;
 
-                this.normals.push(Math.cos(normalanglele), Math.sin(normalanglele), 0);
-                this.normals.push(Math.cos(normalanglele), Math.sin(normalanglele), 0);
-                this.normals.push(Math.cos(normalanglele), Math.sin(normalanglele), 0);
-                this.normals.push(Math.cos(normalanglele), Math.sin(normalanglele), 0);
-
-                this.indices.push((j*4+1)+(this.slices*4*i), (j*4+2)+(this.slices*4*i), (j*4+0)+(this.slices*4*i));
-                this.indices.push((j*4+0)+(this.slices*4*i), (j*4+3)+(this.slices*4*i), (j*4+1)+(this.slices*4*i));
+                this.vertices.push(Math.cos(angle),Math.sin(angle), (i+1)*height);
+                this.normals.push(Math.cos(angle), Math.sin(angle), 0);
+                this.vertices.push(Math.cos(angle), Math.sin(angle), i*height);
+                this.normals.push(Math.cos(angle), Math.sin(angle), 0);
+                
 
 
-                angle += var_inc;
-                normalanglele += var_inc;
+                this.indices.push(index++, index++,index++);
+                this.indices.push(index--,index--,index++);
+                index += 2;
+
+
             }
         }
 
