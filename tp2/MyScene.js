@@ -38,6 +38,8 @@ export class MyScene extends CGFscene {
     this.parallelogram = new MyParallelogram(this);
     this.triangle_small = new MyTriangleSmall(this);
     this.triangle_big = new MyTriangleBig(this);*/
+
+    this.unitCube = new MyUnitCube(this);
     this.tangram = new MyTangram(this);
     this.unitCubeQuad = new MyUnitCubeQuad(this);
     this.quad = new MyQuad(this);
@@ -141,16 +143,17 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    /*
+    
     this.pushMatrix();
     this.multMatrix(translateTangram);
     this.multMatrix(rotateTangram);
     if(this.displayTangram) this.tangram.display();
-    this.popMatrix();*/
+    this.popMatrix();
 
     //if(this.displayQuad) this.quad.display();
     if(this.displayUnitCubeQuad) this.unitCubeQuad.display();
 
+    this.unitCube.display();
 
     //if(this.displayQuad) this.quad.display();
     
