@@ -37,7 +37,7 @@ export class MyScene extends CGFscene {
         this.tangram = new MyTangram(this);
         this.myUnitCube = new MyUnitCube(this);
         this.prism = new MyPrism(this, 8, 1);
-        this.cylinder = new MyCylinder(this);
+        this.cylinder = new MyCylinder(this, 8, 1);
         
         this.objects = [this.plane, this.pyramid, this.cone, this.tangram, this.myUnitCube, this.prism, this.cylinder];
 
@@ -199,6 +199,12 @@ export class MyScene extends CGFscene {
 
 
         if (this.selectedObject == 5){
+            this.pushMatrix();
+            this.rotate(-Math.PI/2, 1, 0, 0);
+            this.objects[this.selectedObject].display();
+            this.popMatrix();
+        }
+        else if (this.selectedObject == 6){
             this.pushMatrix();
             this.rotate(-Math.PI/2, 1, 0, 0);
             this.objects[this.selectedObject].display();

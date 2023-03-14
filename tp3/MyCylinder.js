@@ -1,142 +1,71 @@
 import {CGFobject} from '../lib/CGF.js';
 /**
- * MyPrism
+ * MyCilinder
  * @constructor
  * @param scene - Reference to MyScene object
  */
 export class MyCylinder extends CGFobject {
-    constructor(scene, slices, stacks){
-
-        super(scene);
+	constructor(scene, slices, stacks) {
+		super(scene);
 
         this.slices = slices;
-
         this.stacks = stacks;
 
-        this.initBuffers();
+		this.initBuffers();
+	}
+	
+	initBuffers() {
+		this.vertices = [];
+        this.indices = [];
+        this.normals = [];
 
-    }
+        var angle = 0;
+        var var_inc = 2*Math.PI/this.slices;
 
-    initBuffers() {
-		this.vertices = [
-            //Face 1
-            -0.5, 2, 0.5,   //0 <- 22
-            -0.5, 0, 0.5,   //1 <- 23
-            0.5, 0, 0.5,   	//2 <- 4
-            0.5, 2, 0.5,   	//3 <- 5
-            1,0,0,          //4 <- 8
-			1,2,0,          //5 <- 9            
-            0.5, 2, -0.5,   //6 <- 12
-            0.5, 0, -0.5,   //7 <- 13
-            -0.5, 0, -0.5,  //8 <- 16
-            -0.5, 2, -0.5,  //9 <- 17
-            -1,0,0,         //10 <- 20
-            -1,2,0,         //11 <- 21
+        for (var i = 0; i < this.stacks; i++){
+            var normalanglele = var_inc/2;
+            for(var j = 0; j < this.slices; j++){
 
-/*
-			0.5, 0, 0.5,   	//1
-            -0.5, 0, 0.5,   //3
-            -1, 0,0,        //4
-            
-            
+                var height = 1;
 
-            0,2,0,          //7
-            0.5, 2, 0.5,   	//8
+                var sin_a=Math.sin(angle);
+                var sin_aa=Math.sin(angle+var_inc);
+                var cos_a=Math.cos(angle);
+                var cos_aa=Math.cos(angle+var_inc);
 
-            -0.5, 2, 0.5,   //10
-            -1, 2,0,        //11
-            
-            
+                this.vertices.push(cos_a, sin_a, i*height);
+                this.vertices.push(cos_aa, sin_aa, (i+1)*height);
+                this.vertices.push(cos_a, sin_a, (i+1)*height);
+                this.vertices.push(cos_aa, sin_aa, i*height);
 
-            -0.5, 2, 0.5,   //10
-            -0.5, 0, 0.5,   //3
-            0.5, 0, 0.5,   	//1
-*/        
-		];
+                this.normals.push(Math.cos(normalanglele), Math.sin(normalanglele), 0);
+                this.normals.push(Math.cos(normalanglele), Math.sin(normalanglele), 0);
+                this.normals.push(Math.cos(normalanglele), Math.sin(normalanglele), 0);
+                this.normals.push(Math.cos(normalanglele), Math.sin(normalanglele), 0);
 
-		//Counter-clockwise reference of vertices
-		this.indices = [
+                this.indices.push((j*4+1)+(this.slices*4*i), (j*4+2)+(this.slices*4*i), (j*4+0)+(this.slices*4*i));
+                this.indices.push((j*4+0)+(this.slices*4*i), (j*4+3)+(this.slices*4*i), (j*4+1)+(this.slices*4*i));
 
-            //Face 1
-            0,1,2,
-            0,2,1,
 
-            0,2,3,
-            0,3,2,
-
-            
-            //Face 2
-            2,3,4,
-            2,4,3,
-
-            3,5,4,
-            3,4,5,
-            
-            //Face 3
-            4,5,7,
-            4,7,5,
-            
-            5,6,7,
-            5,7,6,
-            
-            //Face 4
-            7,8,6,
-            7,6,8,
-
-            8,9,6,
-            8,6,9,
-            
-            //Face 5
-            8,9,10,
-            8,10,9,
-            
-            9,11,10,
-            9,10,11,
-            
-            //Face 6
-            10,11,0,
-            10,0,11,
-
-            10,0,1,
-            10,1,0
-            
-		];
-
-        
-        this.normals = [
-            //Normal 1
-            -1,0,1,
-            -1,0,1,
-
-            //Normal 2
-            1,0,1,
-            1,0,1,
-            
-            //Normal 3
-            1,0,0,
-            1,0,0,
-
-            //Normal 4
-            1,0,-1,
-            1,0,-1,
-            
-            //Normal 5
-            -1,0,-1,
-            -1,0,-1,
-
-            //Normal 6
-            -1,0,0,
-            -1,0,0,
-        ]
+                angle += var_inc;
+                normalanglele += var_inc;
+            }
+        }
 
 		//The defined indices (and corresponding vertices)
-		//will be read in groups of three to draw triangles
+		//will be read in groups of three to draw triangleles
 		this.primitiveType = this.scene.gl.TRIANGLES;
 
 		this.initGLBuffers();
 	}
+    /**
+     * Called when user interacts with GUI to change object's complexity.
+     * @param {integer} complexity - changes number of slices
+    */ 
+    updateBuffers(complexity){
+        this.slices = 4 + Math.round(8 * complexity); //complexity varies 0-1, so slices varies 3-12
 
-    updateBuffers(complextity){
+        // reinitialize buffers
         this.initBuffers();
         this.initNormalVizBuffers();
     }
