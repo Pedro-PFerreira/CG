@@ -44,16 +44,6 @@ export class MyScene extends CGFscene {
 
         //------
 
-        //------ Diamond Material
-
-        this.tangramMaterial = new CGFappearance(this);
-        this.tangramMaterial.setAmbient(0.1, 0.1, 0.1, 1);
-        this.tangramMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.tangramMaterial.setSpecular(0.1, 0.1, 0.1, 1);
-        this.tangramMaterial.setShininess(10.0);
-        this.tangramMaterial.loadTexture('images/tangram.png');
-        this.tangramMaterial.setTextureWrap('REPEAT', 'REPEAT');
-
 
         //------ Textures
         this.texture1 = new CGFtexture(this, 'images/board.jpg');

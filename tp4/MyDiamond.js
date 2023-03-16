@@ -30,7 +30,8 @@ export class MyDiamond extends CGFobject {
 			1, 3, 2,
 			
 			0, 2, 1,
-			1, 2, 3
+			1, 2, 3,
+
 		];
 
 		this.normals = [
@@ -55,9 +56,7 @@ export class MyDiamond extends CGFobject {
 			0.25,0.25, //A
 			0.5,0.5,   //D
 			0.25,0.5,  //B
-			0.25,0.75  //C
-			
-			
+			0.25,0.75 //C
 		]
 
 		//The defined indices (and corresponding vertices)
