@@ -39,14 +39,10 @@ export class MyCylinder extends CGFobject {
                 this.normals.push(Math.cos(angle), Math.sin(angle), 0);
                 this.vertices.push(Math.cos(angle), Math.sin(angle), i*height);
                 this.normals.push(Math.cos(angle), Math.sin(angle), 0);
-                
-
 
                 this.indices.push(index++, index++,index++);
                 this.indices.push(index--,index--,index++);
                 index += 2;
-
-
             }
         }
 
