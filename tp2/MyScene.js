@@ -153,7 +153,8 @@ export class MyScene extends CGFscene {
     //if(this.displayQuad) this.quad.display();
     if(this.displayUnitCubeQuad) this.unitCubeQuad.display();
 
-    this.unitCube.display();
+    if (this.displayQuad)
+      this.unitCube.display();
 
     //if(this.displayQuad) this.quad.display();
     
