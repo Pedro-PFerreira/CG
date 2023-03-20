@@ -2,6 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/
 import { MyDiamond } from "./MyDiamond.js";
 import { MyQuad } from "./MyQuad.js";
 import { MyTangram } from "./MyTangram.js";
+import { MyUnitCubeQuad } from "./MyUnitCubeQuad.js";
 
 /**
  * MyScene
@@ -30,7 +31,7 @@ export class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
         this.tangram = new MyTangram(this);
-
+        this.unitCubeQuad = new MyUnitCubeQuad(this,'images/mineSide.png','images/mineTop.png','images/mineBottom.png');
         this.diamond = new MyDiamond(this);
 
         //------ Applied Material
@@ -54,8 +55,9 @@ export class MyScene extends CGFscene {
         //-------Objects connected to MyInterface
         this.displayAxis = true;
         this.displayQuad = false;
-        this.displayTangram = true;
+        this.displayTangram = false;
         this.displayDiamond = false;
+        this.displayUnitCubeQuad = true;
         this.scaleFactor = 5;
         this.selectedTexture = -1;        
         this.wrapS = 0;
@@ -149,7 +151,9 @@ export class MyScene extends CGFscene {
             this.diamond.display();
         }
         
-
+        if (this.displayUnitCubeQuad){
+            this.unitCubeQuad.display();
+        }
         // ---- END Primitive drawing section
     }
 }
