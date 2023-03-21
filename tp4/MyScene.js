@@ -27,11 +27,36 @@ export class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
 
+        //------ Mine Materials
+        this.mineTop = new CGFappearance(this);
+        this.mineTop.setAmbient(1, 1, 1, 1);
+        this.mineTop.setDiffuse(1, 1, 1, 1);
+        this.mineTop.setSpecular(0.1, 0.1, 0.1, 1);
+        this.mineTop.setShininess(10.0);
+        this.mineTop.loadTexture('images/mineTop.png');
+        this.mineTop.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.mineSide = new CGFappearance(this);
+        this.mineSide.setAmbient(1, 1, 1, 1);
+        this.mineSide.setDiffuse(1, 1, 1, 1);
+        this.mineSide.setSpecular(0.1, 0.1, 0.1, 1);
+        this.mineSide.setShininess(10.0);
+        this.mineSide.loadTexture('images/mineSide.png');
+        this.mineSide.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.mineBottom = new CGFappearance(this);
+        this.mineBottom.setAmbient(1, 1, 1, 1);
+        this.mineBottom.setDiffuse(1, 1, 1, 1);
+        this.mineBottom.setSpecular(0.1, 0.1, 0.1, 1);
+        this.mineBottom.setShininess(10.0);
+        this.mineBottom.loadTexture('images/mineBottom.png');
+        this.mineBottom.setTextureWrap('REPEAT', 'REPEAT');
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
         this.tangram = new MyTangram(this);
-        this.unitCubeQuad = new MyUnitCubeQuad(this,'images/mineSide.png','images/mineTop.png','images/mineBottom.png');
+        this.unitCubeQuad = new MyUnitCubeQuad(this,this.mineSide,this.mineTop,this.mineBottom);
         this.diamond = new MyDiamond(this);
 
         //------ Applied Material
@@ -135,11 +160,11 @@ export class MyScene extends CGFscene {
         // Default texture filtering in WebCGF is LINEAR. 
         // Uncomment next line for NEAREST when magnifying, or 
         // add a checkbox in the GUI to alternate in real time
+
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
         
-        // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
         if (this.displayQuad){
             this.quad.display();
-            
         }
 
         if (this.displayTangram){
