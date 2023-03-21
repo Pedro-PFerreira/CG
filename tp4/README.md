@@ -14,4 +14,8 @@
 
 ### Exercise 2
 
-- In progress.
+- The goal of this exercise was to understand how to apply different textures to an object that is composed of different smaller objects and, additionally, understand how texture definition works.
+
+- In order to solve the exercise, we configured the textures in MyScene instead of MyUnitCubeQuad and changed the filtering mode after applying each texture and before displaying each MyQuad object that composes the Cube.
+
+![Figure 2](./screenshots/cg-t01g01-tp4-2.png)
