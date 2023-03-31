@@ -70,12 +70,18 @@ export class ShaderScene extends CGFscene {
 		this.appearance.setDiffuse(0.7, 0.7, 0.7, 1);
 		this.appearance.setSpecular(0.0, 0.0, 0.0, 1);
 		this.appearance.setShininess(120);
-
+		/*
 		this.texture = new CGFtexture(this, "textures/texture.jpg");
 		this.appearance.setTexture(this.texture);
-		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+		this.appearance.setTextureWrap('REPEAT'	, 'REPEAT');
 
-		this.texture2 = new CGFtexture(this, "textures/FEUP.jpg");
+		this.texture2 = new CGFtexture(this, "textures/FEUP.jpg");*/
+
+		this.texture = new CGFtexture(this, "textures/waterTex.jpg");
+		this.appearance.setTexture(this.texture);
+		this.appearance.setTextureWrap('REPEAT'	, 'REPEAT');
+
+		this.texture2 = new CGFtexture(this, "textures/waterMap.jpg");
 
 		// shaders initialization
 
@@ -90,7 +96,8 @@ export class ShaderScene extends CGFscene {
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/sepia.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/convolution.frag"),
 			new CGFshader(this.gl, "shaders/bule.vert", "shaders/bule.frag"),
-			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/gray.frag")
+			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/gray.frag"),
+			new CGFshader(this.gl, "shaders/water.vert", "shaders/water.frag")
 		];
 
 		// additional texture will have to be bound to texture unit 1 later, when using the shader, with "this.texture2.bind(1);"
@@ -99,6 +106,7 @@ export class ShaderScene extends CGFscene {
 		this.testShaders[6].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ timeFactor: 0});
 		this.testShaders[9].setUniformsValues({ timeFactor: 0});
+		this.testShaders[11].setUniformsValues({timeFactor: 0});
 
 
 		// Shaders interface variables
@@ -114,7 +122,8 @@ export class ShaderScene extends CGFscene {
 			'Sepia': 7,
 			'Convolution': 8,
 			'Ukraine': 9,
-			'Gray': 10
+			'Gray': 10,
+			'Water': 11
 		};
 
 		// shader code panels references
@@ -126,7 +135,6 @@ export class ShaderScene extends CGFscene {
 
 		this.onShaderCodeVizChanged(this.showShaderCode);
 		this.onSelectedShaderChanged(this.selectedExampleShader);
-
 
 		// set the scene update period 
 		// (to invoke the update() method every 50ms or as close as possible to that )
@@ -203,6 +211,8 @@ export class ShaderScene extends CGFscene {
 
 			this.testShaders[9].setUniformsValues({timeFactor: t / 100 % 100});
 
+			this.testShaders[11].setUniformsValues({timeFactor: t / 100 % 100});
+
 	}
 
 	// main display function
@@ -248,6 +258,8 @@ export class ShaderScene extends CGFscene {
 			this.popMatrix();
 		}
 		else {
+			this.rotate(-Math.PI/2, 1, 0,0);
+
 			this.pushMatrix();
 			
 			this.scale(25, 25, 25);
