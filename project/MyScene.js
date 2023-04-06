@@ -78,7 +78,11 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     if (this.displayAxis) this.axis.display();
 
     //Draw Sphere
-      if(this.displaySphere) this.sphere.display();
+      if(this.displaySphere){
+        this.pushMatrix();
+        this.sphere.display();
+        this.popMatrix();
+      } 
 
     // ---- BEGIN Primitive drawing section
 

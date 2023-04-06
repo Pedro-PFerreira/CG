@@ -21,25 +21,40 @@ export class MySphere extends CGFobject {
         this.textCoords = [];
 
         var index = 0;
+        var theta = 0;
+        var alpha = 0;
+        var theta_inc = Math.PI / 2*this.stacks;
+        var alpha_inc = (2*Math.PI) / this.slices;
+        var vertices_inc = this.slices +1;
 
-        for (var i = 0; i < this.stacks; i++){
-            var teta = j *2*Math.PI/this.stacks;
+        for (var i = 0; i <= (2*this.stacks); i++){
+            var sin_theta = Math.sin(theta);
+            var cos_theta = Math.cos(alpha);
 
-            var sin_teta = Math.sin(teta);
-            var cos_teta = Math.cos(teta);
-            for(var j = 0; j < this.slices; j++){
+            alpha = 0;
+            for (var j = 0; j <= this.slices; j++){
+                this.vertices.push(Math.cos(alpha)* sin_theta);
+                this.vertices.push(cos_theta);
+                this.vertices.push(Math.cos(-alpha)* sin_theta);
+                
+                this.normals.push(Math.cos(alpha)* sin_theta);
+                this.normals.push(cos_theta);
+                this.normals.push(Math.cos(-alpha)* sin_theta);
 
-                var alpha = i * 2*Math.PI / this.slices;
 
-                var sin_alpha = Math.sin(alpha);
-                var cos_alpha = Math.cos(alpha)
+                if (j < (this.stacks * 2) && (i < this.slices)){
+                    this.indices.push(j*vertices_inc+ i + 1);
+                    this.indices.push(j*vertices_inc+ i);
+                    this.indices.push(j*vertices_inc+ i+ this.slices + 1);                    
+                }
 
-                this.vertices.push(sin_teta*sin_alpha, cos_alpha, cos_teta*sin_alpha);
+                this.textCoords.push(i/(this.slices), j/(this.stacks*2));
+                
+                alpha += alpha_inc
 
-                this.indices.push(index++, index++,index++);
-                this.indices.push(index--,index--,index++);
-                index += 2;
             }
+
+            theta += theta_inc;
         }
 
 		//The defined indices (and corresponding vertices)
@@ -48,15 +63,5 @@ export class MySphere extends CGFobject {
 
 		this.initGLBuffers();
 	}
-    /**
-     * Called when user interacts with GUI to change object's complexity.
-     * @param {integer} complexity - changes number of slices
-    */ 
-    updateBuffers(complexity){
-        //this.slices = 4 + Math.round(8 * complexity); //complexity varies 0-1, so slices varies 3-12
-
-        // reinitialize buffers
-        this.initBuffers();
-        this.initNormalVizBuffers();
-    }
+    
 }
