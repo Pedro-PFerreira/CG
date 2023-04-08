@@ -20,7 +20,7 @@ export class MySphere extends CGFobject {
 		this.vertices = [];
         this.indices = [];
         this.normals = [];
-        this.textCoords = [];
+        this.texCoords = [];
 
         var latDivs = 2*this.stacks;
 
@@ -29,6 +29,7 @@ export class MySphere extends CGFobject {
         var theta_inc = Math.PI / latDivs;
         var alpha_inc = (2*Math.PI) / this.slices;  
         var vertices_inc = this.slices +1;
+
 
         for (var i = 0; i <= latDivs; i++){
             var sin_theta = Math.sin(theta);
@@ -63,10 +64,11 @@ export class MySphere extends CGFobject {
 
                 alpha += alpha_inc
 
-                this.textCoords.push(j/(this.slices), i/latDivs);
-
+                this.texCoords.push(j/this.slices, i/latDivs);
+                
             }
             theta += theta_inc;
+
         }
 
 		//The defined indices (and corresponding vertices)
