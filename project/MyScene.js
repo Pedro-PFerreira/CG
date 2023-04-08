@@ -41,6 +41,16 @@ this.appearance = new CGFappearance(this);
 this.appearance.setTexture(this.texture);
 this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
+this.sphere_appearance = new CGFappearance(this);
+this.sphere_text = new CGFtexture(this, 'images/earth.jpg');
+/*
+this.sphere_appearance.setAmbient(0.1, 0.3, 0.7, 1);
+this.sphere_appearance.setDiffuse(0.1, 0.3, 0.7, 1);
+this.sphere_appearance.setSpecular(0.1, 0.1, 0.1, 1);
+this.sphere_appearance.setShininess(120);*/
+this.sphere_appearance.setTexture(this.sphere_text);
+this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
+
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -78,7 +88,12 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     if (this.displayAxis) this.axis.display();
 
     //Draw Sphere
-      if(this.displaySphere) this.sphere.display();
+      if(this.displaySphere){
+        this.pushMatrix();
+        this.sphere_appearance.apply()
+        this.sphere.display();
+        this.popMatrix();
+      } 
 
     // ---- BEGIN Primitive drawing section
 

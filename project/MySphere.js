@@ -3,6 +3,8 @@ import {CGFobject} from '../lib/CGF.js';
  * MySphere
  * @constructor
  * @param scene - Reference to MyScene object
+ * @param slices - Reference to the number of slices
+ * @param stacks - Reference to the number of stacks
  */
 export class MySphere extends CGFobject {
 	constructor(scene, slices, stacks) {
@@ -18,28 +20,55 @@ export class MySphere extends CGFobject {
 		this.vertices = [];
         this.indices = [];
         this.normals = [];
-        this.textCoords = [];
+        this.texCoords = [];
 
-        var index = 0;
+        var latDivs = 2*this.stacks;
 
-        for (var i = 0; i < this.stacks; i++){
-            var teta = j *2*Math.PI/this.stacks;
+        var theta = 0;
+        var alpha = 0;
+        var theta_inc = Math.PI / latDivs;
+        var alpha_inc = (2*Math.PI) / this.slices;  
+        var vertices_inc = this.slices +1;
 
-            var sin_teta = Math.sin(teta);
-            var cos_teta = Math.cos(teta);
-            for(var j = 0; j < this.slices; j++){
 
-                var alpha = i * 2*Math.PI / this.slices;
+        for (var i = 0; i <= latDivs; i++){
+            var sin_theta = Math.sin(theta);
+            var cos_theta = Math.cos(theta);
 
-                var sin_alpha = Math.sin(alpha);
-                var cos_alpha = Math.cos(alpha)
+            alpha = 0;
+            for (var j = 0; j <= this.slices; j++){
+                var x = Math.cos(alpha)* sin_theta;
+                var y = cos_theta;
+                var z = Math.sin(-alpha)* sin_theta;
 
-                this.vertices.push(sin_teta*sin_alpha, cos_alpha, cos_teta*sin_alpha);
+                this.vertices.push(x);
+                this.vertices.push(y);
+                this.vertices.push(z);
 
-                this.indices.push(index++, index++,index++);
-                this.indices.push(index--,index--,index++);
-                index += 2;
+                if (i < latDivs && j < this.slices){
+                    var current = i * vertices_inc + j;
+                    var next = current + vertices_inc;
+ 
+                    this.indices.push(current + 1);
+                    this.indices.push(current);
+                    this.indices.push(next);
+                    
+                    this.indices.push(current + 1);
+                    this.indices.push(next);
+                    this.indices.push(next + 1);
+                }
+
+                this.normals.push(x);
+                this.normals.push(y);
+                this.normals.push(z);
+
+                alpha += alpha_inc
+
+                this.texCoords.push(j/this.slices, i/latDivs);
+                
             }
+            theta += theta_inc;
+
         }
 
 		//The defined indices (and corresponding vertices)
@@ -48,15 +77,5 @@ export class MySphere extends CGFobject {
 
 		this.initGLBuffers();
 	}
-    /**
-     * Called when user interacts with GUI to change object's complexity.
-     * @param {integer} complexity - changes number of slices
-    */ 
-    updateBuffers(complexity){
-        //this.slices = 4 + Math.round(8 * complexity); //complexity varies 0-1, so slices varies 3-12
-
-        // reinitialize buffers
-        this.initBuffers();
-        this.initNormalVizBuffers();
-    }
+    
 }
