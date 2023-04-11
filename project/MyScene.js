@@ -45,7 +45,8 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 this.sphere_appearance = new CGFappearance(this);
 this.sphere_text = new CGFtexture(this, 'images/earth.jpg');
 
-this.sphere_appearance.setShininess(120);
+this.sphere_appearance.setEmission(0.4, 0.4, 0.4, 1);
+this.sphere_appearance.setShininess(300);
 this.sphere_appearance.setTexture(this.sphere_text);
 this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
 

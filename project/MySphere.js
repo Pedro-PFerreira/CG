@@ -39,7 +39,7 @@ export class MySphere extends CGFobject {
             for (var j = 0; j <= this.slices; j++){
                 var x = Math.cos(alpha)* sin_theta;
                 var y = cos_theta;
-                var z = Math.sin(alpha)* sin_theta;
+                var z = Math.sin(-alpha)* sin_theta;
 
                 this.vertices.push(x);
                 this.vertices.push(y);
