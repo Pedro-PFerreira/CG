@@ -1,34 +1,62 @@
 import {CGFappearance, CGFobject} from '../lib/CGF.js';
 import { MySphere } from './MySphere.js';
 /**
- * MyPlane
+ * MyPanorama
  * @constructor
- * @param sphere - Input Sphere
+ * @param scene - Input Scene;
+ * @param texture - Input Texture;
+ * @param slices - Input number of slices;
+ * @param stacks - Input number of stacks;
  */
 export class MyPanorama extends CGFobject {
 	constructor(scene, texture, slices, stacks) {
 		super(scene);
-
-        this.sphere = new MySphere(this.scene, slices, stacks, true);
-
-        this.panorama_appearance = new CGFappearance(scene);
-
-		this.initBuffers(texture, slices, stacks);
+		this.initMaterials(this.scene, texture);
+        this.panorama = new MySphere(this.scene, slices, stacks, true);
 	}
-	
-	display(texture) {
 
-        this.panorama_appearance.setShininess(300);
+	initMaterials(scene, texture){
+		this.panoramaAppearance = new CGFappearance(scene);
 
-        this.panorama_appearance.setTexture(texture);
+		this.panoramaAppearance.setEmission(0.9, 0.9, 0.9, 1);
 
-        this.panorama_appearance.setTextureWrap('REPEAT', 'REPEAT');
+        this.panoramaAppearance.setShininess(300);
 
-		//The defined indices (and corresponding vertices)
-		//will be read in groups of three to draw triangleles
-		this.primitiveType = this.scene.gl.TRIANGLES;
+        this.panoramaAppearance.setTexture(texture);
 
-		this.initGLBuffers();
+        this.panoramaAppearance.setTextureWrap('REPEAT', 'REPEAT');
 	}
+
+	display() {
+
+		var translatepanorama = [
+			1,0,0,0,
+			0,1,0,0,
+			0,0,1,0,
+			this.scene.camera.position[0],this.scene.camera.position[1],this.scene.camera.position[2],1
+		];
+
+		var scalepanorama = [
+			200,0,0,0,
+			0,200,0,0,
+			0,0,200,0,
+			0,0,0,1
+		];
+
+		this.scene.pushMatrix();
+		this.scene.multMatrix(translatepanorama);
+		this.scene.multMatrix(scalepanorama);
+		this.panoramaAppearance.apply();
+		this.panorama.display();
+		this.scene.popMatrix();
+	}
+
+	updateBuffers(complexity){
+        //this.slices = 4 + Math.round(8 * complexity); //complexity varies 0-1, so slices varies 3-12
+
+        // reinitialize buffers
+        this.initBuffers();
+        this.initNormalVizBuffers();
+    }
     
 }
