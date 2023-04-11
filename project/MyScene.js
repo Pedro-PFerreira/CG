@@ -33,6 +33,7 @@ export class MyScene extends CGFscene {
     this.displayAxis = true;
     this.scaleFactor = 1;
     this.displaySphere = false;
+    this.displayNormals = false;
 
     this.enableTextures(true);
 
@@ -43,11 +44,8 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
 this.sphere_appearance = new CGFappearance(this);
 this.sphere_text = new CGFtexture(this, 'images/earth.jpg');
-/*
-this.sphere_appearance.setAmbient(0.1, 0.3, 0.7, 1);
-this.sphere_appearance.setDiffuse(0.1, 0.3, 0.7, 1);
-this.sphere_appearance.setSpecular(0.1, 0.1, 0.1, 1);
-this.sphere_appearance.setShininess(120);*/
+
+this.sphere_appearance.setShininess(120);
 this.sphere_appearance.setTexture(this.sphere_text);
 this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
 
@@ -93,7 +91,14 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
         this.sphere_appearance.apply()
         this.sphere.display();
         this.popMatrix();
-      } 
+      }
+      
+      if (this.displayNormals){
+        this.sphere.enableNormalViz();
+      }
+      else{
+        this.sphere.disableNormalViz();
+      }
 
     // ---- BEGIN Primitive drawing section
 

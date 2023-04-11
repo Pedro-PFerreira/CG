@@ -1,17 +1,15 @@
 import {CGFobject} from '../lib/CGF.js';
+import { MySphere } from './MySphere.js';
 /**
- * MySphere
+ * MyPlane
  * @constructor
- * @param scene - Reference to MyScene object
- * @param slices - Reference to the number of slices
- * @param stacks - Reference to the number of stacks
+ * @param sphere - Input Sphere
  */
-export class MySphere extends CGFobject {
-	constructor(scene, slices, stacks) {
+export class MyPanorama extends CGFobject {
+	constructor(scene, texture, slices, stacks) {
 		super(scene);
 
-        this.slices = slices;
-        this.stacks = stacks;
+        this.sphere = new MySphere(scene, slices, stacks);
 
 		this.initBuffers();
 	}
@@ -58,8 +56,8 @@ export class MySphere extends CGFobject {
                     this.indices.push(next + 1);
                 }
 
-                this.normals.push(x);
-                this.normals.push(y);
+                this.normals.push(-x);
+                this.normals.push(-y);
                 this.normals.push(z);
 
                 alpha += alpha_inc
