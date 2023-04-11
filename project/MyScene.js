@@ -1,4 +1,5 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
+import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 
@@ -28,11 +29,18 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 30, 20);
+    this.panorama = new MyPanorama(this, this.panorama_text, 200, 200);
+
+    this.objects = [this.sphere, this.panorama];
+
+    this.objectIDs = {'Sphere': 0, 'Panorama': 1};
+
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
-    this.displaySphere = false;
+    this.selectedObject = 0;
+    this.displayObject = true;
     this.displayNormals = false;
 
     this.enableTextures(true);
@@ -41,6 +49,8 @@ this.texture = new CGFtexture(this, "images/terrain.jpg");
 this.appearance = new CGFappearance(this);
 this.appearance.setTexture(this.texture);
 this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+this.panorama_text = new CGFtexture(this, "images/panorama4.jpg");
 
 this.sphere_appearance = new CGFappearance(this);
 this.sphere_text = new CGFtexture(this, 'images/earth.jpg');
@@ -85,21 +95,27 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
 
     // Draw axis
     if (this.displayAxis) this.axis.display();
-
     //Draw Sphere
-      if(this.displaySphere){
-        this.pushMatrix();
-        this.sphere_appearance.apply()
-        this.sphere.display();
-        this.popMatrix();
-      }
+    if (this.selectedObject == 0){
+      this.pushMatrix();
+      this.sphere_appearance.apply()
+      this.objects[this.selectedObject].display();
+      this.popMatrix();
+    }
+
+    if (this.selectedObject == 1){
+      this.pushMatrix();
+      this.objects[this.selectedObject].panorama_appearance.apply();
+      this.objects[this.selectedObject].display();
+      this.popMatrix();
+    }
       
-      if (this.displayNormals){
-        this.sphere.enableNormalViz();
-      }
-      else{
-        this.sphere.disableNormalViz();
-      }
+    if (this.displayNormals){
+      this.objects[this.selectedObject].enableNormalViz();
+    }
+    else{
+      this.sphere.disableNormalViz();
+    }
 
     // ---- BEGIN Primitive drawing section
 
