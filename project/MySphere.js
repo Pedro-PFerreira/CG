@@ -7,9 +7,9 @@ import {CGFobject} from '../lib/CGF.js';
  * @param stacks - Reference to the number of stacks
  */
 export class MySphere extends CGFobject {
-	constructor(scene, slices, stacks) {
+	constructor(scene, slices, stacks, inverted) {
 		super(scene);
-
+        this.inverted = inverted;
         this.slices = slices;
         this.stacks = stacks;
 
@@ -40,6 +40,9 @@ export class MySphere extends CGFobject {
                 var x = Math.cos(alpha)* sin_theta;
                 var y = cos_theta;
                 var z = Math.sin(-alpha)* sin_theta;
+                if (this.inverted){
+                    z = -z;
+                }                
 
                 this.vertices.push(x);
                 this.vertices.push(y);
@@ -77,5 +80,12 @@ export class MySphere extends CGFobject {
 
 		this.initGLBuffers();
 	}
+
+    updateBuffers(complexity){
+       
+        // reinitialize buffers
+        this.initBuffers();
+        this.initNormalVizBuffers();
+    }
     
 }
