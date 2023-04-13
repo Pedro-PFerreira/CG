@@ -1,7 +1,12 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
+import { MyRectangle } from "./MyRectangle.js";
 import { MySphere } from "./MySphere.js";
+import { MyHead } from "./MyHead.js";
+import { MyTriangle } from "./MyTriangle.js";
+import { MyWing } from "./MyWing.js";
+import { MyBird } from "./MyBird.js";
 
 /**
  * MyScene
@@ -37,6 +42,9 @@ export class MyScene extends CGFscene {
     this.objectIDs = {'Sphere': 0, 'Panorama': 1};
 
 
+    //Bird (Tests)
+    this.bird = new MyBird(this);
+
     //Objects connected to MyInterface
     this.displayAxis = false;
     this.scaleFactor = 1;
@@ -71,8 +79,12 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
       0.9,
       0.1,
       1000,
-      vec3.fromValues(50, 10, 15),
-      vec3.fromValues(0, 0, 0)
+      //CAMERA VALUES FOR TESTING BIRD
+      vec3.fromValues(10,2,3),
+      vec3.fromValues(0,0,0)
+      //CORRECT VALUES BELOW
+      //vec3.fromValues(50, 10, 15),
+      //vec3.fromValues(0, 0, 0)
     );
   }
   setDefaultAppearance() {
@@ -116,6 +128,8 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
       this.objects[this.selectedObject].display();
       this.popMatrix();
     }
+
+    this.bird.display();
       
     if (this.displayNormals){
       this.sphere.enableNormalViz();
