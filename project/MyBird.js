@@ -79,5 +79,10 @@ export class MyBird extends CGFobject{
     this.scene.popMatrix();
   }
 
+  updateBuffers(complexity){
+  
+    this.initBuffers();
+    this.initNormalVizBuffers();
+  }
 
 }

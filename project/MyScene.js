@@ -37,13 +37,12 @@ export class MyScene extends CGFscene {
     this.panorama_text = new CGFtexture(this, "images/panorama4.jpg");
     this.panorama = new MyPanorama(this, this.panorama_text, 30, 20);
 
-    this.objects = [this.sphere, this.panorama];
-
-    this.objectIDs = {'Sphere': 0, 'Panorama': 1};
-
-
     //Bird (Tests)
     this.bird = new MyBird(this);
+
+    this.objects = [this.sphere, this.panorama, this.bird];
+
+    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2};
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -129,13 +128,17 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
       this.popMatrix();
     }
 
-    this.bird.display();
+    if (this.selectedObject == 2){
+      //this.pushMatrix();
+      this.objects[this.selectedObject].display();
+      this.popMatrix();
+    }
       
     if (this.displayNormals){
-      this.sphere.enableNormalViz();
+      this.objects[this.selectedObject].enableNormalViz();
     }
     else{
-      this.sphere.disableNormalViz();
+      this.objects[this.selectedObject].disableNormalViz();
     }
 
     // ---- BEGIN Primitive drawing section
