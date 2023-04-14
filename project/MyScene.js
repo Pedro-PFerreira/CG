@@ -1,4 +1,5 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
+import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
 import { MyRectangle } from "./MyRectangle.js";
 import { MySphere } from "./MySphere.js";
@@ -33,14 +34,21 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 30, 20);
+    this.panorama_text = new CGFtexture(this, "images/panorama4.jpg");
+    this.panorama = new MyPanorama(this, this.panorama_text, 30, 20);
 
     //Bird (Tests)
     this.bird = new MyBird(this);
 
+    this.objects = [this.sphere, this.panorama, this.bird];
+
+    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2};
+
     //Objects connected to MyInterface
-    this.displayAxis = true;
+    this.displayAxis = false;
     this.scaleFactor = 1;
-    this.displaySphere = false;
+    this.selectedObject = 0;
+    this.displayObject = true;
     this.displayNormals = false;
 
     this.enableTextures(true);
@@ -53,7 +61,8 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 this.sphere_appearance = new CGFappearance(this);
 this.sphere_text = new CGFtexture(this, 'images/earth.jpg');
 
-this.sphere_appearance.setShininess(120);
+this.sphere_appearance.setEmission(0.4, 0.4, 0.4, 1);
+this.sphere_appearance.setShininess(300);
 this.sphere_appearance.setTexture(this.sphere_text);
 this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
 
@@ -66,7 +75,7 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
   }
   initCameras() {
     this.camera = new CGFcamera(
-      1.0,
+      0.9,
       0.1,
       1000,
       //CAMERA VALUES FOR TESTING BIRD
@@ -83,6 +92,11 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
+
+  updateObjectComplexity(){
+    this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
+  }
+
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -94,26 +108,38 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
     // Apply transformations corresponding to the camera position relative to the origin
     this.applyViewMatrix();
 
+    this.pushMatrix();
+
     // Draw axis
     if (this.displayAxis) this.axis.display();
-
+    
     //Draw Sphere
-      if(this.displaySphere){
-        this.pushMatrix();
-        this.sphere_appearance.apply()
-        this.sphere.display();
-        this.popMatrix();
-      }
+    if (this.selectedObject == 0){
+      this.pushMatrix();
+      this.sphere_appearance.apply()
+      this.objects[this.selectedObject].display();
+      this.popMatrix();
+    }
 
-    //Bird (Tests)
-    this.bird.display();
+    //Draw Panorama
+    if (this.selectedObject == 1){
+
+      this.objects[this.selectedObject].display();
+      this.popMatrix();
+    }
+
+    if (this.selectedObject == 2){
+      //this.pushMatrix();
+      this.objects[this.selectedObject].display();
+      this.popMatrix();
+    }
       
-      if (this.displayNormals){
-        this.sphere.enableNormalViz();
-      }
-      else{
-        this.sphere.disableNormalViz();
-      }
+    if (this.displayNormals){
+      this.objects[this.selectedObject].enableNormalViz();
+    }
+    else{
+      this.objects[this.selectedObject].disableNormalViz();
+    }
 
     // ---- BEGIN Primitive drawing section
 

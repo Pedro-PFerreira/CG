@@ -53,8 +53,6 @@ export class MyScene extends CGFscene {
         this.scaleFactor = 2.0;
         this.lightFactor = 0.3;
 
-        
-
     }
     initLights() {
         this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1.0);
