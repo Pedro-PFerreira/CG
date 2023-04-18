@@ -50,17 +50,34 @@ export class MyHead extends CGFobject{
             9,12,6,
             9,5,13
 		];
-/*
+
 		this.normals = [
-			0,0,1,
-			0,0,1,
-			0,0,1,
-
-			0,0,-1,
-			0,0,-1,
-			0,0,-1			
-
-		];*/
+            
+        ];
+        /*
+        for (var i = 0; i < 14; i++){
+            var x,y,z;
+            x = this.vertices[i * 3], y = this.vertices[i*3 + 1], z = this.vertices [i*3 + 2];
+            console.log(this.normals);
+            if(y == 1){
+                this.normals.push(0,1,0);
+                this.normals.push(0,1,0);
+                this.normals.push(0,1,0);
+                this.normals.push(0,1,0);
+            }
+            else if (y == -1){
+                this.normals.push(0,-1,0);
+                this.normals.push(0,-1,0);
+                this.normals.push(0,-1,0);
+                this.normals.push(0,-1,0);
+            }
+            else{
+                this.normals.push(1,1,1);
+                this.normals.push(1,1,1);
+                this.normals.push(1,1,1);
+                this.normals.push(1,1,1);
+            }
+        }*/
 /*
 		this.texCoords = [
 			0, 0.5,     //A

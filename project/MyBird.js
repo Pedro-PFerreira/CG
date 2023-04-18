@@ -18,9 +18,9 @@ export class MyBird extends CGFobject{
         //Olhos
         this.eye = new MySphere(this.scene,30,20);
         //Cabeça
-        this.head = new MyHead(this.scene);
+        this.head = new MySphere(this.scene,30,20);
         //Corpo
-        this.torso = new MyHead(this.scene);
+        this.torso = new MySphere(this.scene,30,20);
         //Pescoço
         this.neck = new MyCylinder(this.scene,30,20);
         //Bico
@@ -37,10 +37,8 @@ export class MyBird extends CGFobject{
     this.tail.display();
     this.scene.popMatrix();
 
-
     this.scene.pushMatrix();
     this.scene.scale(2,1,1.5);
-    this.scene.translate(0,0,-1.5);
     this.torso.display();
     this.scene.popMatrix();
 
@@ -59,7 +57,7 @@ export class MyBird extends CGFobject{
 
     this.scene.pushMatrix();
     this.scene.scale(0.8,0.8,0.8);
-    this.scene.translate(4,0,-1.5);
+    this.scene.translate(4,0,0);
     this.head.display();
     this.scene.popMatrix();
 

@@ -4,6 +4,7 @@ import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyBird } from "./MyBird.js";
 import { MyTail } from "./MyTail.js";
+import { MyHead } from "./MyHead.js";
 
 /**
  * MyScene
@@ -31,20 +32,21 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 30, 20);
+    this.head = new MyHead(this);
     this.panorama_text = new CGFtexture(this, "images/panorama4.jpg");
     this.panorama = new MyPanorama(this, this.panorama_text, 30, 20);
 
     //Bird (Tests)
     this.bird = new MyBird(this);
 
-    this.objects = [this.sphere, this.panorama, this.bird, this.tail];
+    this.objects = [this.sphere, this.panorama, this.bird, this.head];
 
-    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2};
+    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Head': 3};
 
     //Objects connected to MyInterface
     this.displayAxis = false;
     this.scaleFactor = 1;
-    this.selectedObject = 0;
+    this.selectedObject = 2;
     this.displayObject = true;
     this.displayNormals = false;
 
@@ -109,6 +111,11 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
 
     // Draw axis
     if (this.displayAxis) this.axis.display();
+
+    //Draw Head
+    if (this.selectedObject == 3){
+      this.head.display();
+    }
     
     //Draw Sphere
     if (this.selectedObject == 0){
