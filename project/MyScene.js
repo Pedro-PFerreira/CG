@@ -50,6 +50,7 @@ export class MyScene extends CGFscene {
     this.beak_tex.setSpecular(1, 1,1, 1.0);
     this.beak_tex.setShininess(10.0);
 
+
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);

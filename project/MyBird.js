@@ -70,6 +70,7 @@ export class MyBird extends CGFobject{
     this.scene.translate(1.5,0,0);
     this.scene.rotate(Math.PI/2,0,1,0);
     this.scene.scale(0.3,0.3,1);
+    this.feathers_tex.apply();
     this.neck.display();
     this.scene.popMatrix();
 

@@ -18,6 +18,7 @@ export class MyCylinder extends CGFobject {
 		this.vertices = [];
         this.indices = [];
         this.normals = [];
+        this.texCoords = [];
 
         var index = 0;
         var angle = 0;
@@ -43,9 +44,10 @@ export class MyCylinder extends CGFobject {
                 this.indices.push(index++, index++,index++);
                 this.indices.push(index--,index--,index++);
                 index += 2;
+
+                this.texCoords.push(j/this.slices, i/(2 * this.stacks));
             }
         }
-
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangleles
 		this.primitiveType = this.scene.gl.TRIANGLES;
