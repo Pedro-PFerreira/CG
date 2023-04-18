@@ -4,6 +4,7 @@ import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyBird } from "./MyBird.js";
 import { MyTail } from "./MyTail.js";
+import { MyTerrain } from "./MyTerrain.js";
 
 /**
  * MyScene
@@ -33,13 +34,14 @@ export class MyScene extends CGFscene {
     this.sphere = new MySphere(this, 30, 20);
     this.panorama_text = new CGFtexture(this, "images/panorama4.jpg");
     this.panorama = new MyPanorama(this, this.panorama_text, 30, 20);
+    this.terrain = new MyTerrain(this, 40, 2);
 
     //Bird (Tests)
     this.bird = new MyBird(this);
 
-    this.objects = [this.sphere, this.panorama, this.bird, this.tail];
+    this.objects = [this.sphere, this.panorama, this.bird, this.terrain];
 
-    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2};
+    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Terrain': 3};
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -115,22 +117,26 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
   
       this.sphere_appearance.apply()
       this.objects[this.selectedObject].display();
-      this.popMatrix();
     }
 
     //Draw Panorama
     if (this.selectedObject == 1){
 
       this.objects[this.selectedObject].display();
-      this.popMatrix();
     }
 
     //Draw Bird
     if (this.selectedObject == 2){
 
       this.objects[this.selectedObject].display();
-      this.popMatrix();
     }
+
+    //Draw Terrain
+    if (this.selectedObject == 3){
+      this.objects[this.selectedObject].display();
+    }
+
+    this.popMatrix();
 
     if (this.displayNormals){
       this.objects[this.selectedObject].enableNormalViz();
