@@ -28,6 +28,28 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
 
+    //Bird Materiais --------------------------------
+      //Penas
+    this.feathers_tex = new CGFappearance(this);
+    this.feathers_tex.setAmbient(1, 1, 1, 1);
+    this.feathers_tex.setDiffuse(1, 1, 1, 1);
+    this.feathers_tex.setSpecular(0.1, 0.1, 0.1, 1);
+    this.feathers_tex.setShininess(10.0);
+    this.feathers_tex.loadTexture('images/feathers.jpg');
+    this.feathers_tex.setTextureWrap('REPEAT', 'REPEAT');
+      //Olhos
+    this.eyes_tex = new CGFappearance(this);
+    this.eyes_tex.setAmbient(0, 0, 0,1.0);
+    this.eyes_tex.setDiffuse(0,0,0, 1.0);
+    this.eyes_tex.setSpecular(1, 1,1, 1.0);
+    this.eyes_tex.setShininess(10.0);
+      //Bico
+    this.beak_tex = new CGFappearance(this);
+    this.beak_tex.setAmbient(1, 0.647, 0,1.0);
+    this.beak_tex.setDiffuse(0,0,0, 1.0);
+    this.beak_tex.setSpecular(1, 1,1, 1.0);
+    this.beak_tex.setShininess(10.0);
+
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
@@ -37,7 +59,7 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, this.panorama_text, 30, 20);
 
     //Bird (Tests)
-    this.bird = new MyBird(this);
+    this.bird = new MyBird(this,[this.feathers_tex, this.eyes_tex, this.beak_tex]);
 
     this.objects = [this.sphere, this.panorama, this.bird, this.head];
 
@@ -51,6 +73,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
 
     this.enableTextures(true);
+    
 
 this.texture = new CGFtexture(this, "images/terrain.jpg");
 this.appearance = new CGFappearance(this);
