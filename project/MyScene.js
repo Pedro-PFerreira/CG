@@ -64,7 +64,7 @@ export class MyScene extends CGFscene {
 
     this.objects = [this.sphere, this.panorama, this.bird, this.head];
 
-    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Head': 3};
+    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Bird + Panorama': 3};
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -138,7 +138,8 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
 
     //Draw Head
     if (this.selectedObject == 3){
-      this.head.display();
+      this.bird.display();
+      this.panorama.display();
     }
     
     //Draw Sphere

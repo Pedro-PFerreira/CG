@@ -35,6 +35,8 @@ export class MyBird extends CGFobject{
 	}
 
   display(){
+    this.scene.pushMatrix();
+    this.scene.translate(0,3,0);
 
     this.scene.pushMatrix();
     this.scene.translate(-2,0,0);
@@ -94,6 +96,8 @@ export class MyBird extends CGFobject{
     this.scene.scale(0.2,0.2,0.2);
     this.eyes_tex.apply();
     this.eye.display();
+    this.scene.popMatrix();
+
     this.scene.popMatrix();
   }
 
