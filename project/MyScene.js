@@ -1,12 +1,9 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
-import { MyRectangle } from "./MyRectangle.js";
 import { MySphere } from "./MySphere.js";
-import { MyHead } from "./MyHead.js";
-import { MyTriangle } from "./MyTriangle.js";
-import { MyWing } from "./MyWing.js";
 import { MyBird } from "./MyBird.js";
+import { MyTail } from "./MyTail.js";
 
 /**
  * MyScene
@@ -40,7 +37,7 @@ export class MyScene extends CGFscene {
     //Bird (Tests)
     this.bird = new MyBird(this);
 
-    this.objects = [this.sphere, this.panorama, this.bird];
+    this.objects = [this.sphere, this.panorama, this.bird, this.tail];
 
     this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2};
 
@@ -115,7 +112,7 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
     
     //Draw Sphere
     if (this.selectedObject == 0){
-      this.pushMatrix();
+  
       this.sphere_appearance.apply()
       this.objects[this.selectedObject].display();
       this.popMatrix();
@@ -128,12 +125,13 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
       this.popMatrix();
     }
 
+    //Draw Bird
     if (this.selectedObject == 2){
-      //this.pushMatrix();
+
       this.objects[this.selectedObject].display();
       this.popMatrix();
     }
-      
+
     if (this.displayNormals){
       this.objects[this.selectedObject].enableNormalViz();
     }

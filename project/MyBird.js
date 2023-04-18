@@ -4,6 +4,7 @@ import { MySphere } from "./MySphere.js";
 import { MyWing } from "./MyWing.js";
 import { MyCylinder } from "./MyCylinder.js";
 import { MyCone } from "./MyCone.js";
+import { MyTail } from "./MyTail.js";
 /**
  * MyBird
  * @constructor
@@ -24,9 +25,19 @@ export class MyBird extends CGFobject{
         this.neck = new MyCylinder(this.scene,30,20);
         //Bico
         this.beak = new MyCone(this.scene,30,20);
+        //Cauda
+        this.tail = new MyTail(this.scene);
+
 	}
 
   display(){
+
+    this.scene.pushMatrix();
+    this.scene.translate(-2,0,0);
+    this.tail.display();
+    this.scene.popMatrix();
+
+
     this.scene.pushMatrix();
     this.scene.scale(2,1,1.5);
     this.scene.translate(0,0,-1.5);
