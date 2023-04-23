@@ -2,17 +2,33 @@
 precision highp float;
 #endif
 
-uniform sampler2D textura;
-uniform sampler2D altimetria;
-varying float scale_alt;
-varying float scale_tex;
-variying float offset
+varying vec2 aTextureCoord;
+varying vec2 vAltCoord;
+uniform sampler2D uSampler;
 
 void main() {
 
-    vec4 cor_altimetria = texture2D(altimetria, scale_alt + offset);
+    vec4 color1 = texture2D(uSampler, aTextureCoord);
 
-    vec4 cor_textura = texture2D(altimetria, scale_tex + offset);
+    vec4 color2 = texture2D(uSampler,vAltCoord);
 
-	gl_FragColor = cor_altimetria + cor_textura;
+    vec4 textColor = color1;
+
+    vec4 altColor = color2;
+
+    textColor.r = color1.r * 0.700 + color1.g * 0.700 + color1.b * 0.700;
+
+    textColor.g = color1.r * 0.700 + color1.g * 0.700 + color1.b * 0.700;
+
+    textColor.b = color1.r * 0.700 + color1.g * 0.700 + color1.b * 0.700;
+
+    altColor.r = color2.r * 0.300 + color2.g * 0.300+ color2.b * 0.300;
+
+    altColor.g = color2.r * 0.300 + color2.g * 0.300+ color2.b * 0.300;
+
+    altColor.b = color2.r * 0.300 + color2.g * 0.300+ color2.b * 0.300;
+
+    gl_FragColor = textColor + altColor;
+
 }
+
