@@ -2,13 +2,14 @@
 precision highp float;
 #endif
 
-varying vec2 aTextureCoord;
+varying vec2 vTextureCoord;
 varying vec2 vAltCoord;
 uniform sampler2D uSampler;
 
+
 void main() {
 
-    vec4 color1 = texture2D(uSampler, aTextureCoord);
+    vec4 color1 = texture2D(uSampler, vTextureCoord);
 
     vec4 color2 = texture2D(uSampler,vAltCoord);
 
