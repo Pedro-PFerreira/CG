@@ -34,7 +34,7 @@ export class MyScene extends CGFscene {
     this.sphere = new MySphere(this, 30, 20);
     this.panorama_text = new CGFtexture(this, "images/panorama4.jpg");
     this.panorama = new MyPanorama(this, this.panorama_text, 30, 20);
-    this.terrain = new MyTerrain(this, 40, 2);
+    this.terrain = new MyTerrain(this, this.plane);
 
     //Bird (Tests)
     this.bird = new MyBird(this);
@@ -114,25 +114,26 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
     
     //Draw Sphere
     if (this.selectedObject == 0){
-  
+      this.setActiveShader(this.defaultShader);
       this.sphere_appearance.apply()
       this.objects[this.selectedObject].display();
     }
 
     //Draw Panorama
     if (this.selectedObject == 1){
-
+      this.setActiveShader(this.defaultShader);
       this.objects[this.selectedObject].display();
     }
 
     //Draw Bird
     if (this.selectedObject == 2){
-
+      this.setActiveShader(this.defaultShader);
       this.objects[this.selectedObject].display();
     }
 
     //Draw Terrain
     if (this.selectedObject == 3){
+      this.setActiveShader(this.testShaders[0]);
       this.objects[this.selectedObject].display();
     }
 

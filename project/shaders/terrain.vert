@@ -1,22 +1,20 @@
 attribute vec3 aVertexPosition;
 attribute vec3 aVertexNormal;
 attribute vec2 aTextureCoord;
-attribute vec2 altCoord;
 
 uniform mat4 uMVMatrix;
 uniform mat4 uPMatrix;
 uniform mat4 uNMatrix;
 
 varying vec2 vTextureCoord;
-varying vec2 vAltCoord;
-
+uniform sampler2D uSampler2;
 
 void main() {
 
-	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
-
 	vTextureCoord = aTextureCoord;
+	vec3 offset=vec3(0.0,0.0,0.0);
 
-	vAltCoord = altCoord;
+	offset= 0.1*aVertexNormal* (texture2D(uSampler2, vTextureCoord).b - 0.4);
 
+	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + offset, 1.0);
 }

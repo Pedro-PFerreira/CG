@@ -9,10 +9,10 @@ import { MyPlane } from './MyPlane.js';
  * @param numText - number of the selected Texture
 */
 export class MyTerrain extends CGFobject {
-	constructor(scene, nDivs, numText) {
+	constructor(scene, plane) {
 		super(scene);
-        this.numText = numText;
-		this.plane = new MyPlane(scene, nDivs);
+        this.plane = plane;
+		//this.plane = new MyPlane(scene, nDivs);
 		this.initMaterials(this.scene);
         this.initTextures(this.scene);
 	}
@@ -40,8 +40,6 @@ export class MyTerrain extends CGFobject {
 
     initTextures(scene){
 
-        scene.enableTextures();
-
         scene.gl.clearDepth(10000.0);
 		scene.gl.clearColor(1, 1, 1, 1.0);
 		scene.gl.enable(scene.gl.DEPTH_TEST);
@@ -49,14 +47,12 @@ export class MyTerrain extends CGFobject {
 		scene.gl.depthFunc(scene.gl.LEQUAL);
 
         scene.enableTextures(true);
-
-        scene.testShaders = [
-            new CGFshader(scene.gl, "shaders/terrain.vert", "shaders/terrain.frag")
-        ];
-
-        scene.testShaders[0].setUniformsValues({uSampler: 1});
-
-        scene.setActiveShader(scene.testShaders[0]);
+        
+        scene.testShaders = [new CGFshader(scene.gl, "shaders/terrain.vert", "shaders/terrain.frag")];
+        scene.testShaders[0].setUniformsValues({uSampler1: new CGFtexture(scene, "images/altimetry.png")});
+        scene.testShaders[0].setUniformsValues({uSampler2: new CGFtexture(scene, "images/heightmap_modified.jpg")});
+        scene.testShaders[0].setUniformsValues({uSampler3: new CGFtexture(scene, "images/terrain.jpg")});
+        scene.testShaders[0].bind();
 
         scene.pushMatrix();
     }
@@ -65,15 +61,8 @@ export class MyTerrain extends CGFobject {
 
 	display(){
         this.scene.pushMatrix();
-        this.scene.rotate(-Math.PI/2, 1,0,0);
-        if (this.numText == 1){
-            
-            this.terrainMaterial1.apply();
-        }
-        else if (this.numText == 2){
-            
-            this.terrainMaterial2.apply();
-        }
+        this.scene.rotate(-Math.PI/2, 1,0,0);    
+        this.terrainMaterial1.apply();
         this.plane.display();
         this.scene.popMatrix();
     }
