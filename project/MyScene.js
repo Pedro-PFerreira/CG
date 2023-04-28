@@ -2,6 +2,9 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
+import { MyBird } from "./MyBird.js";
+import { MyTail } from "./MyTail.js";
+import { MyTerrain } from "./MyTerrain.js";
 
 /**
  * MyScene
@@ -26,16 +29,18 @@ export class MyScene extends CGFscene {
     this.gl.depthFunc(this.gl.LEQUAL);
 
     //Initialize scene objects
-    this.axis = new CGFaxis(this);
-    this.plane = new MyPlane(this,30);
+    this.axis = new CGFaxis(this) 
     this.sphere = new MySphere(this, 30, 20);
     this.panorama_text = new CGFtexture(this, "images/panorama4.jpg");
     this.panorama = new MyPanorama(this, this.panorama_text, 30, 20);
+    this.terrain = new MyTerrain(this, new MyPlane(this,30));
 
-    this.objects = [this.sphere, this.panorama];
+    //Bird (Tests)
+    this.bird = new MyBird(this);
 
-    this.objectIDs = {'Sphere': 0, 'Panorama': 1};
+    this.objects = [this.sphere, this.panorama, this.bird, this.terrain];
 
+    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Terrain': 3};
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -71,8 +76,12 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
       0.9,
       0.1,
       1000,
-      vec3.fromValues(50, 10, 15),
-      vec3.fromValues(0, 0, 0)
+      //CAMERA VALUES FOR TESTING BIRD
+      vec3.fromValues(10,2,3),
+      vec3.fromValues(0,0,0)
+      //CORRECT VALUES BELOW
+      //vec3.fromValues(50, 10, 15),
+      //vec3.fromValues(0, 0, 0)
     );
   }
   setDefaultAppearance() {
@@ -104,35 +113,50 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
     
     //Draw Sphere
     if (this.selectedObject == 0){
-      this.pushMatrix();
+      this.setActiveShader(this.defaultShader);
       this.sphere_appearance.apply()
       this.objects[this.selectedObject].display();
-      this.popMatrix();
     }
 
     //Draw Panorama
     if (this.selectedObject == 1){
-
+      this.setActiveShader(this.defaultShader);
       this.objects[this.selectedObject].display();
-      this.popMatrix();
+      this.setActiveShader(this.testShaders[0]);
+      this.objects[3].display();
     }
-      
+
+    //Draw Bird
+    if (this.selectedObject == 2){
+      this.setActiveShader(this.defaultShader);
+      this.objects[this.selectedObject].display();
+    }
+
+    //Draw Terrain
+    if (this.selectedObject == 3){
+      this.setActiveShader(this.testShaders[0]);
+      this.objects[this.selectedObject].display();
+    }
+
+    this.popMatrix();
+
     if (this.displayNormals){
-      this.sphere.enableNormalViz();
+      this.objects[this.selectedObject].enableNormalViz();
     }
     else{
-      this.sphere.disableNormalViz();
+      this.objects[this.selectedObject].disableNormalViz();
     }
 
     // ---- BEGIN Primitive drawing section
 
+    /*
     this.pushMatrix();
     this.appearance.apply();
     this.translate(0,-100,0);
     this.scale(400,400,400);
     this.rotate(-Math.PI/2.0,1,0,0);
-    this.plane.display();
-    this.popMatrix();
+    this.terrain.plane.display();
+    this.popMatrix();*/
 
     // ---- END Primitive drawing section
   }
