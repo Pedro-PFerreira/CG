@@ -29,12 +29,11 @@ export class MyScene extends CGFscene {
     this.gl.depthFunc(this.gl.LEQUAL);
 
     //Initialize scene objects
-    this.axis = new CGFaxis(this);
-    this.plane = new MyPlane(this,30);
+    this.axis = new CGFaxis(this) 
     this.sphere = new MySphere(this, 30, 20);
     this.panorama_text = new CGFtexture(this, "images/panorama4.jpg");
     this.panorama = new MyPanorama(this, this.panorama_text, 30, 20);
-    this.terrain = new MyTerrain(this, this.plane);
+    this.terrain = new MyTerrain(this, new MyPlane(this,30));
 
     //Bird (Tests)
     this.bird = new MyBird(this);
@@ -123,6 +122,8 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
     if (this.selectedObject == 1){
       this.setActiveShader(this.defaultShader);
       this.objects[this.selectedObject].display();
+      this.setActiveShader(this.testShaders[0]);
+      this.objects[3].display();
     }
 
     //Draw Bird
@@ -148,13 +149,14 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
 
     // ---- BEGIN Primitive drawing section
 
+    /*
     this.pushMatrix();
     this.appearance.apply();
     this.translate(0,-100,0);
     this.scale(400,400,400);
     this.rotate(-Math.PI/2.0,1,0,0);
-    this.plane.display();
-    this.popMatrix();
+    this.terrain.plane.display();
+    this.popMatrix();*/
 
     // ---- END Primitive drawing section
   }
