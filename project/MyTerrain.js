@@ -57,8 +57,6 @@ export class MyTerrain extends CGFobject {
         scene.pushMatrix();
     }
 
-
-
 	display(){
         this.scene.pushMatrix();
         this.scene.translate(0,-100,0);

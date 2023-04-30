@@ -5,6 +5,7 @@ import { MySphere } from "./MySphere.js";
 import { MyBird } from "./MyBird.js";
 import { MyTail } from "./MyTail.js";
 import { MyTerrain } from "./MyTerrain.js";
+import { MyBirdEgg } from "./MyBirdEgg.js";
 
 /**
  * MyScene
@@ -38,9 +39,12 @@ export class MyScene extends CGFscene {
     //Bird (Tests)
     this.bird = new MyBird(this);
 
-    this.objects = [this.sphere, this.panorama, this.bird, this.terrain];
+    //Egg (Tests)
+    this.egg = new MyBirdEgg(this, 30, 20);
 
-    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Terrain': 3};
+    this.objects = [this.sphere, this.panorama, this.bird, this.terrain, this.egg];
+
+    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Terrain': 3, 'Egg': 4};
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -135,6 +139,11 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
     //Draw Terrain
     if (this.selectedObject == 3){
       this.setActiveShader(this.testShaders[0]);
+      this.objects[this.selectedObject].display();
+    }
+
+    //Draw Egg
+    if (this.selectedObject == 4){
       this.objects[this.selectedObject].display();
     }
 
