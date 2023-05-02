@@ -44,6 +44,12 @@ export class MyScene extends CGFscene {
 
     this.objects = [this.sphere, this.panorama, this.bird, this.terrain, this.egg];
 
+    this.eggList = [];
+
+    for (var i = 1; i < 5; i++){
+      this.eggList.push(new MyBirdEgg(this, 30, 20));
+    }
+
     this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Terrain': 3, 'Egg': 4};
 
     //Objects connected to MyInterface
@@ -127,6 +133,12 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
       this.setActiveShader(this.defaultShader);
       this.objects[this.selectedObject].display();
       this.setActiveShader(this.testShaders[0]);
+
+      for (var i = 0; i < this.eggList.length; i++){
+
+        this.eggList[i].display();
+      }
+
       this.objects[3].display();
     }
 
@@ -139,7 +151,9 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
     //Draw Terrain
     if (this.selectedObject == 3){
       this.setActiveShader(this.testShaders[0]);
+      this.egg.display();
       this.objects[this.selectedObject].display();
+
     }
 
     //Draw Egg

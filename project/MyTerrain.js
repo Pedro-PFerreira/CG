@@ -12,7 +12,6 @@ export class MyTerrain extends CGFobject {
 	constructor(scene, plane) {
 		super(scene);
         this.plane = plane;
-		//this.plane = new MyPlane(scene, nDivs);
 		this.initMaterials(this.scene);
         this.initTextures(this.scene);
 	}
