@@ -151,7 +151,6 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
     //Draw Terrain
     if (this.selectedObject == 3){
       this.setActiveShader(this.testShaders[0]);
-      this.egg.display();
       this.objects[this.selectedObject].display();
 
     }

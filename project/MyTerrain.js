@@ -48,10 +48,13 @@ export class MyTerrain extends CGFobject {
         scene.enableTextures(true);
         
         scene.testShaders = [new CGFshader(scene.gl, "shaders/terrain.vert", "shaders/terrain.frag")];
-        scene.testShaders[0].setUniformsValues({uSampler1: new CGFtexture(scene, "images/altimetry.png")});
-        scene.testShaders[0].setUniformsValues({uSampler2: new CGFtexture(scene, "images/heightmap_modified.jpg")});
-        scene.testShaders[0].setUniformsValues({uSampler3: new CGFtexture(scene, "images/terrain.jpg")});
-        scene.testShaders[0].bind();
+        scene.testShaders[0].setUniformsValues({uSampler1: 1});
+        scene.testShaders[0].setUniformsValues({uSampler2: 2});
+        scene.testShaders[0].setUniformsValues({uSampler3: 3});
+        this.texture1 = new CGFtexture(scene, "images/altimetry.png");
+        this.texture2 = new CGFtexture(scene, "images/heightmap_modified.jpg");
+        this.texture3 = new CGFtexture(scene, "images/terrain.jpg");
+        
 
         scene.pushMatrix();
     }
@@ -60,7 +63,10 @@ export class MyTerrain extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(0,-100,0);
         this.scene.scale(400,400,400);
-        this.scene.rotate(-Math.PI/2.0,1,0,0);   
+        this.scene.rotate(-Math.PI/2.0,1,0,0);
+        this.texture1.bind(1);
+        this.texture2.bind(2);
+        this.texture3.bind(3);
         this.terrainMaterial1.apply();
         this.plane.display();
         this.scene.popMatrix();
