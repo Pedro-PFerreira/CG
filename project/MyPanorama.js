@@ -33,8 +33,8 @@ export class MyPanorama extends CGFobject {
 			1,0,0,0,
 			0,1,0,0,
 			0,0,1,0,
-			this.scene.camera.position[0],this.scene.camera.position[1],this.scene.camera.position[2],1
-			//0,0,0,1
+			//this.scene.camera.position[0],this.scene.camera.position[1],this.scene.camera.position[2],1
+			0,0,0,1
 		];
 
 		var scalepanorama = [

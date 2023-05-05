@@ -130,16 +130,15 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
 
     //Draw Panorama
     if (this.selectedObject == 1){
-      this.setActiveShader(this.defaultShader);
       this.objects[this.selectedObject].display();
       this.setActiveShader(this.testShaders[0]);
+      this.objects[3].display();
+      this.setActiveShader(this.defaultShader);
 
       for (var i = 0; i < this.eggList.length; i++){
-
+        
         this.eggList[i].display();
       }
-
-      this.objects[3].display();
     }
 
     //Draw Bird

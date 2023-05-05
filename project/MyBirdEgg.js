@@ -31,14 +31,7 @@ export class MyBirdEgg extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.scale(0.75,1.5,1);
-/*
-        var x = 70;
-
-        var y = -62;
-
-        var z = -20;
-
-        this.scene.translate(x,y,z);*/      
+        this.scene.translate(150, -41.25, 10);     
         this.eggTexture.apply();
         this.egg.display();
         this.scene.popMatrix();
