@@ -156,6 +156,7 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
 
     //Draw Egg
     if (this.selectedObject == 4){
+      this.setActiveShader(this.defaultShader);
       this.objects[this.selectedObject].display();
     }
 
