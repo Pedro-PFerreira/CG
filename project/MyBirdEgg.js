@@ -11,7 +11,7 @@ export class MyBirdEgg extends CGFobject {
 	constructor(scene, slices, stacks) {
 		super(scene);
 
-        this.egg = new MySphere(scene, slices, stacks, false);
+        this.egg = new MySphere(scene, slices, stacks);
 
         this.initMaterials();
 
@@ -42,7 +42,7 @@ export class MyBirdEgg extends CGFobject {
     display(){
 
         this.scene.pushMatrix();
-        var y = -62.5;
+        var y = -62.5; // Reference value for the height of the highplane + center os the egg
         this.scene.translate(this.x, y, this.z);
         this.scene.rotate(this.angle_rot * (Math.PI / 180),1,0,0,0);
         this.scene.scale(0.75,1.5,1);     
