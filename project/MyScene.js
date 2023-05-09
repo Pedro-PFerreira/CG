@@ -77,12 +77,6 @@ export class MyScene extends CGFscene {
     this.sphere_appearance.setTexture(this.sphere_text);
     this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
 
-    this.nest_appearance = new CGFappearance(this);
-    this.nest_appearance.setEmission(1,1,1,1);
-    this.nest_appearance.setShininess(20.0);
-    this.nest_appearance.loadTexture('images/nest_texture.jpg');
-    this.nest_appearance.setTextureWrap('REPEAT', 'REPEAT');
-
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -148,6 +142,8 @@ export class MyScene extends CGFscene {
         
         this.eggList[i].display();
       }
+
+      this.nest.display();
       
     }
 
@@ -173,9 +169,6 @@ export class MyScene extends CGFscene {
     //Draw Nest
     if (this.selectedObject == 5){
 
-      this.rotate(-Math.PI/2, 1,0,0,0);
-      
-      this.nest_appearance.apply();
       this.objects[this.selectedObject].display();
     }
 
