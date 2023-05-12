@@ -1,4 +1,4 @@
-import {CGFobject} from '../lib/CGF.js';
+import {CGFappearance,CGFobject} from '../lib/CGF.js';
 import { MyQuad } from './MyQuad.js';
 /**
  * MyBillboard
@@ -12,13 +12,22 @@ export class MyBillboard extends CGFobject {
 
         this.quad = new MyQuad(scene, coords);
 		
+        this.initMaterials();
         this.display(x,y,z);
 	}
 
+    initMaterials(){
+        this.billboardTexture = new CGFappearance(this.scene);
+        this.billboardTexture.setEmission(1,1,1,1);
+        this.billboardTexture.setShininess(20.0);
+        this.billboardTexture.loadTexture('images/billboardtree.png');
+        this.billboardTexture.setTextureWrap('REPEAT', 'REPEAT');
+    }
+
     display(x, y,z){
 
-        this.scene.translate(x,y,z);
-
+        //this.scene.translate(x,y,z);
+        this.billboardTexture.apply();
         this.quad.display();
     }
 
@@ -31,5 +40,10 @@ export class MyBillboard extends CGFobject {
 		this.texCoords = [...coords];
 		this.updateTexCoordsGLBuffers();
 	}
+
+    updateBuffers(){
+        this.initBuffers();
+        this.initNormalVizBuffers();
+    }
 }
 

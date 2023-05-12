@@ -6,6 +6,7 @@ import { MyBird } from "./MyBird.js";
 import { MyNest } from "./MyNest.js";
 import { MyTerrain } from "./MyTerrain.js";
 import { MyBirdEgg } from "./MyBirdEgg.js";
+import { MyBillboard } from "./MyBillboard.js";
 
 /**
  * MyScene
@@ -45,7 +46,10 @@ export class MyScene extends CGFscene {
     //Nest (Tests)
     this.nest = new MyNest(this, 30, 20);
 
-    this.objects = [this.sphere, this.panorama, this.bird, this.terrain, this.egg, this.nest];
+    //Billboard (Tests)
+    this.billboard = new MyBillboard(this, undefined, 10, 10, 10);
+
+    this.objects = [this.sphere, this.panorama, this.bird, this.terrain, this.egg, this.nest, this.billboard];
 
     this.eggList = [];
 
@@ -53,7 +57,7 @@ export class MyScene extends CGFscene {
       this.eggList.push(new MyBirdEgg(this, 30, 20));
     }
 
-    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Terrain': 3, 'Egg': 4, 'Nest': 5};
+    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Terrain': 3, 'Egg': 4, 'Nest': 5, 'Billboard': 6};
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -144,6 +148,8 @@ export class MyScene extends CGFscene {
       }
 
       this.nest.display();
+
+      this.billboard.display();
       
     }
 
@@ -169,6 +175,11 @@ export class MyScene extends CGFscene {
     //Draw Nest
     if (this.selectedObject == 5){
 
+      this.objects[this.selectedObject].display();
+    }
+
+    //Draw Billboard
+    if (this.selectedObject == 6){
       this.objects[this.selectedObject].display();
     }
 
