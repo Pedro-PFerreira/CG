@@ -3,7 +3,7 @@ import { MyPanorama } from "./MyPanorama.js";
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyBird } from "./MyBird.js";
-import { MyTail } from "./MyTail.js";
+import { MyNest } from "./MyNest.js";
 import { MyTerrain } from "./MyTerrain.js";
 import { MyBirdEgg } from "./MyBirdEgg.js";
 
@@ -42,7 +42,10 @@ export class MyScene extends CGFscene {
     //Egg (Tests)
     this.egg = new MyBirdEgg(this, 30, 20);
 
-    this.objects = [this.sphere, this.panorama, this.bird, this.terrain, this.egg];
+    //Nest (Tests)
+    this.nest = new MyNest(this, 30, 20);
+
+    this.objects = [this.sphere, this.panorama, this.bird, this.terrain, this.egg, this.nest];
 
     this.eggList = [];
 
@@ -50,7 +53,7 @@ export class MyScene extends CGFscene {
       this.eggList.push(new MyBirdEgg(this, 30, 20));
     }
 
-    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Terrain': 3, 'Egg': 4};
+    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Terrain': 3, 'Egg': 4, 'Nest': 5};
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -61,18 +64,18 @@ export class MyScene extends CGFscene {
 
     this.enableTextures(true);
 
-this.texture = new CGFtexture(this, "images/terrain.jpg");
-this.appearance = new CGFappearance(this);
-this.appearance.setTexture(this.texture);
-this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.texture = new CGFtexture(this, "images/terrain.jpg");
+    this.appearance = new CGFappearance(this);
+    this.appearance.setTexture(this.texture);
+    this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
-this.sphere_appearance = new CGFappearance(this);
-this.sphere_text = new CGFtexture(this, 'images/earth.jpg');
+    this.sphere_appearance = new CGFappearance(this);
+    this.sphere_text = new CGFtexture(this, 'images/earth.jpg');
 
-this.sphere_appearance.setEmission(0.4, 0.4, 0.4, 1);
-this.sphere_appearance.setShininess(300);
-this.sphere_appearance.setTexture(this.sphere_text);
-this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.sphere_appearance.setEmission(0.4, 0.4, 0.4, 1);
+    this.sphere_appearance.setShininess(300);
+    this.sphere_appearance.setTexture(this.sphere_text);
+    this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
 
   }
   initLights() {
@@ -130,16 +133,18 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
 
     //Draw Panorama
     if (this.selectedObject == 1){
-      this.setActiveShader(this.defaultShader);
       this.objects[this.selectedObject].display();
       this.setActiveShader(this.testShaders[0]);
+      this.objects[3].display();
+      this.setActiveShader(this.defaultShader);
 
       for (var i = 0; i < this.eggList.length; i++){
-
+        
         this.eggList[i].display();
       }
 
-      this.objects[3].display();
+      this.nest.display();
+      
     }
 
     //Draw Bird
@@ -157,6 +162,13 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
 
     //Draw Egg
     if (this.selectedObject == 4){
+      this.setActiveShader(this.defaultShader);
+      this.objects[this.selectedObject].display();
+    }
+
+    //Draw Nest
+    if (this.selectedObject == 5){
+
       this.objects[this.selectedObject].display();
     }
 
