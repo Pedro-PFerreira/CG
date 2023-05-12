@@ -29,3 +29,28 @@
 - In this part, we had to create a terrain that will substitute the existent plane. Even though this terrain is based on the plane, we had to modify it in order to give the perspective of elevation. In order to do that we had to create a vert and a frag shader so that we could modify the colors and the vertexs' positions. The result is shown below:
 
 ![Terrain](./screenshots/project-t01g01-3.png)
+
+## Exercise 5
+
+- In this part, we had to integrate a couple of eggs and the bird's nest in the terrain. In order to do that, we decided to make this aproach:
+
+1) Create the Egg instance;
+2) "Populate" the terrain with eggs;
+3) Create the Nest instance;
+4) Put nest in the terrain;
+
+- In the first point we simply use the Sphere instance and apply to it some scale operations and we obtained the egg successfully. However, this was not the difficult part, but the terrain "population" was.
+
+- This was the one of the most difficult parts of the project, since we had to consider various positions for the eggs, all of them different from each other. 
+
+- Firstly, we had to create a highplane, in order to put them in the terrain. We started to modify the heightmap and put there a 20x20 black square, near the river. However, this makes the that zone was on the same height of the bottom of the lake, which was not supposed to happen. In order to solve the problem we used an intermediate grey so it could be in a intermediate height. The final height map is shown below:
+
+![Height Map](./images/heightmap_modified.jpg)
+
+- With the highplane created, we had to insert the eggs there, and is was when we struggled- since we had to find correct value of y, so any egg could be right above the surface in any position or rotation and they belonged to space limited by the highplane. We did that by trial error.
+
+- Finally, we simply had to create the Nest instance and put it in the highplane. The instance was not difficult at all, since it could be seen as semicircle; however, its code could be improved. Besides that, we had to apply the nest texture and rotation operation as well. The correct values of coordinates were obtained in the same approach as eggs (trial error). The final result is shown below:
+
+![Eggs and Nest](./screenshots/project-t01g01-4.png)
+
+- The final movement of the bird is still under development.
