@@ -5,6 +5,7 @@ import { MySphere } from "./MySphere.js";
 import { MyBird } from "./MyBird.js";
 import { MyTail } from "./MyTail.js";
 import { MyHead } from "./MyHead.js";
+import { MyAnimatedBird } from "./MyAnimatedBird.js";
 
 /**
  * MyScene
@@ -16,6 +17,10 @@ export class MyScene extends CGFscene {
   }
   init(application) {
     super.init(application);
+
+    //Animation
+    this.appStartTime = Date.now();
+    this.setUpdatePeriod(50);
     
     this.initCameras();
     this.initLights();
@@ -50,6 +55,8 @@ export class MyScene extends CGFscene {
     this.beak_tex.setSpecular(1, 1,1, 1.0);
     this.beak_tex.setShininess(10.0);
 
+    this.birdTextures = [this.feathers_tex,this.eyes_tex,this.beak_tex];
+
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
@@ -60,7 +67,8 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, this.panorama_text, 30, 20);
 
     //Bird (Tests)
-    this.bird = new MyBird(this,[this.feathers_tex, this.eyes_tex, this.beak_tex]);
+    this.bird = new MyAnimatedBird(this, this.birdTextures);
+    //this.bird = new MyBird(this,[this.feathers_tex, this.eyes_tex, this.beak_tex]);
 
     this.objects = [this.sphere, this.panorama, this.bird, this.head];
 
@@ -182,5 +190,11 @@ this.sphere_appearance.setTextureWrap('REPEAT', 'REPEAT');
     this.popMatrix();
 
     // ---- END Primitive drawing section
+  }
+
+  update(t){
+    var timeSinceAppStart= (t-this.appStartTime)/1000.0; //in seconds
+    this.bird.update(timeSinceAppStart);
+    this.bird.display();
   }
 }

@@ -1,37 +1,36 @@
+import { CGFobject } from "../lib/CGF.js";
 import {MyBird} from "./MyBird.js";
 
 export class MyAnimatedBird extends CGFobject{
-    constructor(scene, s = 0, e = 0, st = 0, d = 1) {
+    constructor(scene, textures) {
+        super(scene);
 		this.scene = scene;
-        this.obj = new MyBird(scene);
-
-        this.startVal=s;
-        this.endVal=e;
-        this.animStartTimeSecs=st;
-        this.animDurationSecs=d;
-        this.length=(this.endVal-this.startVal);
-
-        this.animVal = this.startVal;
+        this.obj = new MyBird(scene, textures);
+        this.animVal = 0;
+        this.elapsedTimeSecs;
     }
 
     update(timeSinceAppStart){
-        var elapsedTimeSecs = timeSinceAppStart - this.animStartTimeSecs;
-        if(elapsedTimeSecs == 0.0 || elapsedTimeSecs == 0.5 || elapsedTimeSecs == 1.0){
-            this.animVal = 0.0;
+        var now = Date.now();
+        this.elapsedTimeSecs = timeSinceAppStart % 1;
+        if(this.elapsedTimeSecs == 0.0 || this.elapsedTimeSecs == 0.5 || this.elapsedTimeSecs == 1.0){
+          this.animVal = 0.0;
         }
-        else if (elapsedTimeSecs > 0.0 && elapsedTimeSecs < 0.5){
-            this.animVal = elapsedTimeSecs;
+        else if (this.elapsedTimeSecs > 0.0 && this.elapsedTimeSecs < 0.5){
+          this.animVal = this.elapsedTimeSecs;
         }
-        else if (elapsedTimeSecs > 0.5 && elapsedTimeSecs < 1){
-            this.animVal = 1 - elapsedTimeSecs;
+        else if (this.elapsedTimeSecs > 0.5 && this.elapsedTimeSecs < 1){
+          this.animVal = 1 - this.elapsedTimeSecs;
         }
+        console.log("Updating animVal...");
+        console.log(this.animVal);
     }
 
     display()
     {
         this.scene.pushMatrix();
-        this.scene.translate(0,this.animVal,0);
-
+        this.scene.translate(0,this.animVal*2,0);
+        console.log("Drawing Bird...");
         this.obj.display();
 
         this.scene.popMatrix();

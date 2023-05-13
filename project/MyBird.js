@@ -32,6 +32,9 @@ export class MyBird extends CGFobject{
         this.beak = new MyCone(this.scene,30,20);
         //Cauda
         this.tail = new MyTail(this.scene);
+
+        this.parts = [this.wing,this.eye,this.head,this.torso,this.neck,this.beak,this.tail];
+        this.animVal = 0;
 	}
 
   display(){
@@ -46,6 +49,7 @@ export class MyBird extends CGFobject{
 
     this.scene.pushMatrix();
     this.scene.scale(2,1,1.5);
+    this.scene.translate(0,0,0);
     this.torso.display();
     this.scene.popMatrix();
 
@@ -107,4 +111,17 @@ export class MyBird extends CGFobject{
     this.initNormalVizBuffers();
   }
 
+  update(timeSinceAppStart){
+    var elapsedTimeSecs = timeSinceAppStart - this.animStartTimeSecs;
+    elapsedTimeSecs = elapsedTimeSecs - Math.trunc(elapsedTimeSecs);
+    if(elapsedTimeSecs == 0.0 || elapsedTimeSecs == 0.5 || elapsedTimeSecs == 1.0){
+      this.animVal = 0.0;
+    }
+    else if (elapsedTimeSecs > 0.0 && elapsedTimeSecs < 0.5){
+      this.animVal = elapsedTimeSecs;
+    }
+    else if (elapsedTimeSecs > 0.5 && elapsedTimeSecs < 1){
+      this.animVal = 1 - elapsedTimeSecs;
+    }
+  }
 }
