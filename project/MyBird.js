@@ -112,16 +112,6 @@ export class MyBird extends CGFobject{
   }
 
   update(timeSinceAppStart){
-    var elapsedTimeSecs = timeSinceAppStart - this.animStartTimeSecs;
-    elapsedTimeSecs = elapsedTimeSecs - Math.trunc(elapsedTimeSecs);
-    if(elapsedTimeSecs == 0.0 || elapsedTimeSecs == 0.5 || elapsedTimeSecs == 1.0){
-      this.animVal = 0.0;
-    }
-    else if (elapsedTimeSecs > 0.0 && elapsedTimeSecs < 0.5){
-      this.animVal = elapsedTimeSecs;
-    }
-    else if (elapsedTimeSecs > 0.5 && elapsedTimeSecs < 1){
-      this.animVal = 1 - elapsedTimeSecs;
-    }
+    this.wing.update(timeSinceAppStart);
   }
 }
