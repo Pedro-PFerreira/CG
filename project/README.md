@@ -54,3 +54,32 @@
 ![Eggs and Nest](./screenshots/project-t01g01-4.png)
 
 - The final movement of the bird is still under development.
+
+## Exercise 6
+
+- In this part we had to create trees in order to make a forest. This process was not difficult.
+
+- Firstly, we had to create a Billboard, which will always rotate so that it could be seen at front by the camera. We followed the steps to calculate that the vectors, the angle and the rotation axis, and we had the desired effect. It was also important to make the Y component to 0.
+
+- Secondly he had to choose 3 textures for the trees. Here are the chosen ones:
+
+- First texture:
+
+![First Texture](./images/billboardtree.png)
+
+- Second texture:
+
+![Second Texture](./images/billboardtree_2.png)
+
+- And the third texture:
+
+![Third Texture](./images/billboardtree_3.png)
+
+
+- We used a random number generator between 1 to 3 in order to make the trees with different textures. 
+
+- Finally, we had to create a Tree Patch and a Tree Row. The first we simply instatiate with 2 for-loops 9 trees and put them as a 3x3 matrix, which was not difficult at all. The Tree Row was easier- we simply needed a for-loop to put them in a row.
+
+- We displayed them in our panorama and we noticed also that we had to resize our highplane, so every elements of the world could be visible. Here is the final result:
+
+![Trees](./screenshots/project-t01g01-5.png)
