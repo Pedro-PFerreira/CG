@@ -7,13 +7,17 @@ import { MyQuad } from './MyQuad.js';
  * @param {Array} coords - Array of texture coordinates (optional)
  */
 export class MyBillboard extends CGFobject {
-	constructor(scene, coords, x,y,z) {
+	constructor(scene, x,y,z) {
 		super(scene);
 
-        this.quad = new MyQuad(scene, coords);
+        this.quad = new MyQuad(scene);
 		
+        this.x = x;
+        this.y = y;
+        this.z = z;
+
         this.initMaterials();
-        this.display(x,y,z);
+        this.display(this.x,this.y,this.z);
 	}
 
     initMaterials(){
@@ -24,9 +28,25 @@ export class MyBillboard extends CGFobject {
         this.billboardTexture.setTextureWrap('REPEAT', 'REPEAT');
     }
 
-    display(x, y,z){
+    display(x,y,z){
 
-        //this.scene.translate(x,y,z);
+        //Quad's Normal vector 
+        let quad_normals = [0,0,1];
+
+        // Camera position vector;
+        let camera_pos = [this.scene.camera.position[0], 0, this.scene.camera.position[2]];        
+
+        let magnitude = Math.sqrt(camera_pos[0]*camera_pos[0] + camera_pos[2]*camera_pos[2]);
+
+        camera_pos = [camera_pos[0] / magnitude, 0, camera_pos[2] / magnitude];
+
+        let angle = Math.acos((vec3.dot(quad_normals, camera_pos))* (Math.PI/180));
+        let rot_axis = [0,0,1];
+
+        vec3.cross(rot_axis, quad_normals, camera_pos);
+        this.scene.scale(10, 10, 10);
+        this.scene.translate(this.x,this.y,this.z);
+        this.scene.rotate(angle, rot_axis[0], rot_axis[1], rot_axis[2]);      
         this.billboardTexture.apply();
         this.quad.display();
     }

@@ -47,7 +47,7 @@ export class MyScene extends CGFscene {
     this.nest = new MyNest(this, 30, 20);
 
     //Billboard (Tests)
-    this.billboard = new MyBillboard(this, undefined, 10, 10, 10);
+    this.billboard = new MyBillboard(this, 10, -5.5, 2);
 
     this.objects = [this.sphere, this.panorama, this.bird, this.terrain, this.egg, this.nest, this.billboard];
 
