@@ -38,9 +38,9 @@ export class MyTreeGroupPatch extends CGFobject {
         let offset;
         for (let i = 0; i < 3;i++){
             for (let j = 0; j < 3; j++){
-                offset = this.getRandomIntInclusive(-0.7, 0.7);
+                offset = this.getRandomIntInclusive(-0.9, 0.9);
                 let tree = new MyBillboard(this.scene, 
-                    x + i*2 + offset, y, z + j*2 + offset);
+                    x + i*1.5 + offset, y, z + j*1.5 + offset);
                 this.trees.push(tree);
             }
         }

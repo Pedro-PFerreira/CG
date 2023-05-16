@@ -39,7 +39,7 @@ export class MyTreeRowPatch extends CGFobject {
         for (let i = 0; i < 6;i++){
             offset = this.getRandomIntInclusive(-0.7, 0.7);
             let tree = new MyBillboard(this.scene, 
-                x + offset, y, z + i*2+ offset);
+                x + offset, y, z + i*1.5 + offset);
             this.trees.push(tree);
         }
     

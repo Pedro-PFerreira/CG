@@ -32,7 +32,7 @@ export class MyTerrain extends CGFobject {
         this.terrainMaterial2.setSpecular(0.1, 0.1, 0.1, 1);
         this.terrainMaterial2.setEmission(1,1,1,1);
         this.terrainMaterial2.setShininess(20.0);
-        this.terrainMaterial2.loadTexture('images/heightmap_modified.jpg');
+        this.terrainMaterial2.loadTexture('images/heightmap_modified_2".jpg');
         this.terrainMaterial2.setTextureWrap('REPEAT', 'REPEAT');
 
     }
@@ -52,7 +52,7 @@ export class MyTerrain extends CGFobject {
         scene.testShaders[0].setUniformsValues({uSampler2: 2});
         scene.testShaders[0].setUniformsValues({uSampler3: 3});
         this.texture1 = new CGFtexture(scene, "images/altimetry.png");
-        this.texture2 = new CGFtexture(scene, "images/heightmap_modified.jpg");
+        this.texture2 = new CGFtexture(scene, "images/heightmap_modified_2.jpg");
         this.texture3 = new CGFtexture(scene, "images/terrain.jpg");
         
 

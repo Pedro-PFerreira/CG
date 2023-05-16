@@ -15,9 +15,9 @@ export class MyBirdEgg extends CGFobject {
 
         this.initMaterials();
 
-        this.x = this.getRandomIntInclusive(85, 105);
+        this.x = this.getRandomIntInclusive(85, 115);
 
-        this.z = this.getRandomIntInclusive(1,30);
+        this.z = this.getRandomIntInclusive(-15,-6);
 
         this.angle_rot = this.getRandomIntInclusive(0, 360);
 

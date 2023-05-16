@@ -49,11 +49,11 @@ export class MyScene extends CGFscene {
     this.nest = new MyNest(this, 30, 20);
 
     //Billboard (Tests)
-    this.billboard = new MyBillboard(this, 10, -5.5, 2);
+    this.billboard = new MyBillboard(this, 10, -5.9, 2);
 
-    this.groupTrees = new MyTreeGroupPatch(this, 10, -5.5, 2);
+    this.groupTrees = new MyTreeGroupPatch(this, 7, -5.9, 1);
 
-    this.rowTrees = new MyTreeRowPatch(this, 15, -5.5, 3);
+    this.rowTrees = new MyTreeRowPatch(this, 12, -5.9, -2.4);
 
     this.objects = [
       this.sphere, this.panorama, this.bird,
@@ -69,7 +69,7 @@ export class MyScene extends CGFscene {
 
     this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Terrain': 3, 'Egg': 4, 'Nest': 5, 'Billboard': 6};
 
-    //Objects connected to MyInterface
+    //Objects conn´ected to MyInterface
     this.displayAxis = false;
     this.scaleFactor = 1;
     this.selectedObject = 0;
