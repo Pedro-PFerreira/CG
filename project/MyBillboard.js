@@ -17,7 +17,7 @@ export class MyBillboard extends CGFobject {
         this.z = z;
 
         this.initMaterials();
-        this.display(this.x,this.y,this.z);
+        this.display();
 	}
 
     initMaterials(){
@@ -28,7 +28,7 @@ export class MyBillboard extends CGFobject {
         this.billboardTexture.setTextureWrap('REPEAT', 'REPEAT');
     }
 
-    display(x,y,z){
+    display(){
 
         //Quad's Normal vector 
         let quad_normals = [0,0,1];
@@ -44,11 +44,13 @@ export class MyBillboard extends CGFobject {
         let rot_axis = [0,0,1];
 
         vec3.cross(rot_axis, quad_normals, camera_pos);
+        this.scene.pushMatrix();
         this.scene.scale(10, 10, 10);
         this.scene.translate(this.x,this.y,this.z);
         this.scene.rotate(angle, rot_axis[0], rot_axis[1], rot_axis[2]);      
         this.billboardTexture.apply();
         this.quad.display();
+        this.scene.popMatrix();
     }
 
 	/**

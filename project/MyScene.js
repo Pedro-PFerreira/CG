@@ -7,6 +7,7 @@ import { MyNest } from "./MyNest.js";
 import { MyTerrain } from "./MyTerrain.js";
 import { MyBirdEgg } from "./MyBirdEgg.js";
 import { MyBillboard } from "./MyBillboard.js";
+import { MyTreeGroupPatch } from "./MyTreeGroupPatch.js";
 
 /**
  * MyScene
@@ -49,7 +50,9 @@ export class MyScene extends CGFscene {
     //Billboard (Tests)
     this.billboard = new MyBillboard(this, 10, -5.5, 2);
 
-    this.objects = [this.sphere, this.panorama, this.bird, this.terrain, this.egg, this.nest, this.billboard];
+    this.groupTrees = new MyTreeGroupPatch(this, 10, -5.5, 2);
+
+    this.objects = [this.sphere, this.panorama, this.bird, this.terrain, this.egg, this.nest, this.billboard, this.groupTrees];
 
     this.eggList = [];
 
@@ -149,8 +152,10 @@ export class MyScene extends CGFscene {
 
       this.nest.display();
 
-      this.billboard.display();
+      //this.billboard.display();
       
+      this.groupTrees.display();
+
     }
 
     //Draw Bird
