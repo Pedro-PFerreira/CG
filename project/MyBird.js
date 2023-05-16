@@ -42,7 +42,8 @@ export class MyBird extends CGFobject{
     this.scene.translate(0,3,0);
 
     this.scene.pushMatrix();
-    this.scene.translate(-2,0,0);
+    this.scene.rotate(-Math.PI/4 * this.animVal,0,0,1);
+    this.scene.translate(-1.5,-this.animVal,0);
     this.feathers_tex.apply();
     this.tail.display();
     this.scene.popMatrix();
@@ -112,6 +113,16 @@ export class MyBird extends CGFobject{
   }
 
   update(timeSinceAppStart){
+    this.elapsedTimeSecs = timeSinceAppStart % 1;
+        if(this.elapsedTimeSecs == 0.0 || this.elapsedTimeSecs == 0.5 || this.elapsedTimeSecs == 1.0){
+            this.animVal = 0.0;
+          }
+          else if (this.elapsedTimeSecs > 0.0 && this.elapsedTimeSecs < 0.5){
+            this.animVal = this.elapsedTimeSecs;
+          }
+          else if (this.elapsedTimeSecs > 0.5 && this.elapsedTimeSecs < 1){
+            this.animVal = 1 - this.elapsedTimeSecs;
+          }
     this.wing.update(timeSinceAppStart);
   }
 }
