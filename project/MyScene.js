@@ -157,8 +157,9 @@ export class MyScene extends CGFscene {
         this.eggList[i].display();
       }
 
-      this.nest.display();      
-      this.groupTrees.display();
+      this.nest.display();
+       
+      this.groupTrees.display();  
       this.rowTrees.display();
     }
 
