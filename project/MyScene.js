@@ -6,6 +6,9 @@ import { MyBird } from "./MyBird.js";
 import { MyNest } from "./MyNest.js";
 import { MyTerrain } from "./MyTerrain.js";
 import { MyBirdEgg } from "./MyBirdEgg.js";
+import { MyTail } from "./MyTail.js";
+import { MyHead } from "./MyHead.js";
+import { MyAnimatedBird } from "./MyAnimatedBird.js";
 
 /**
  * MyScene
@@ -17,6 +20,10 @@ export class MyScene extends CGFscene {
   }
   init(application) {
     super.init(application);
+
+    //Animation
+    this.appStartTime = Date.now();
+    this.setUpdatePeriod(50);
     
     this.initCameras();
     this.initLights();
@@ -29,15 +36,42 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
 
+    //Bird Materiais --------------------------------
+      //Penas
+    this.feathers_tex = new CGFappearance(this);
+    this.feathers_tex.setAmbient(1, 1, 1, 1);
+    this.feathers_tex.setDiffuse(1, 1, 1, 1);
+    this.feathers_tex.setSpecular(0.1, 0.1, 0.1, 1);
+    this.feathers_tex.setShininess(10.0);
+    this.feathers_tex.loadTexture('images/feathers.jpg');
+    this.feathers_tex.setTextureWrap('REPEAT', 'REPEAT');
+      //Olhos
+    this.eyes_tex = new CGFappearance(this);
+    this.eyes_tex.setAmbient(0, 0, 0,1.0);
+    this.eyes_tex.setDiffuse(0,0,0, 1.0);
+    this.eyes_tex.setSpecular(1, 1,1, 1.0);
+    this.eyes_tex.setShininess(10.0);
+      //Bico
+    this.beak_tex = new CGFappearance(this);
+    this.beak_tex.setAmbient(1, 0.647, 0,1.0);
+    this.beak_tex.setDiffuse(0,0,0, 1.0);
+    this.beak_tex.setSpecular(1, 1,1, 1.0);
+    this.beak_tex.setShininess(10.0);
+
+    this.birdTextures = [this.feathers_tex,this.eyes_tex,this.beak_tex];
+
+
     //Initialize scene objects
     this.axis = new CGFaxis(this) 
     this.sphere = new MySphere(this, 30, 20);
+    this.head = new MyHead(this);
     this.panorama_text = new CGFtexture(this, "images/panorama4.jpg");
     this.panorama = new MyPanorama(this, this.panorama_text, 30, 20);
     this.terrain = new MyTerrain(this, new MyPlane(this,30));
 
     //Bird (Tests)
-    this.bird = new MyBird(this);
+    this.bird = new MyAnimatedBird(this, this.birdTextures);
+    //this.bird = new MyBird(this,[this.feathers_tex, this.eyes_tex, this.beak_tex]);
 
     //Egg (Tests)
     this.egg = new MyBirdEgg(this, 30, 20);
@@ -58,11 +92,12 @@ export class MyScene extends CGFscene {
     //Objects connected to MyInterface
     this.displayAxis = false;
     this.scaleFactor = 1;
-    this.selectedObject = 0;
+    this.selectedObject = 2;
     this.displayObject = true;
     this.displayNormals = false;
 
     this.enableTextures(true);
+    
 
     this.texture = new CGFtexture(this, "images/terrain.jpg");
     this.appearance = new CGFappearance(this);
@@ -123,6 +158,12 @@ export class MyScene extends CGFscene {
 
     // Draw axis
     if (this.displayAxis) this.axis.display();
+
+    //Draw Head
+    if (this.selectedObject == 3){
+      this.bird.display();
+      this.panorama.display();
+    }
     
     //Draw Sphere
     if (this.selectedObject == 0){
@@ -193,5 +234,11 @@ export class MyScene extends CGFscene {
     this.popMatrix();*/
 
     // ---- END Primitive drawing section
+  }
+
+  update(t){
+    var timeSinceAppStart= (t-this.appStartTime)/1000.0; //in seconds
+    this.bird.update(timeSinceAppStart);
+    this.bird.display();
   }
 }
