@@ -6,6 +6,9 @@ import { MyBird } from "./MyBird.js";
 import { MyNest } from "./MyNest.js";
 import { MyTerrain } from "./MyTerrain.js";
 import { MyBirdEgg } from "./MyBirdEgg.js";
+import { MyBillboard } from "./MyBillboard.js";
+import { MyTreeGroupPatch } from "./MyTreeGroupPatch.js";
+import { MyTreeRowPatch } from "./MyTreeRowPatch.js";
 import { MyTail } from "./MyTail.js";
 import { MyHead } from "./MyHead.js";
 import { MyAnimatedBird } from "./MyAnimatedBird.js";
@@ -79,7 +82,18 @@ export class MyScene extends CGFscene {
     //Nest (Tests)
     this.nest = new MyNest(this, 30, 20);
 
-    this.objects = [this.sphere, this.panorama, this.bird, this.terrain, this.egg, this.nest];
+    //Billboard (Tests)
+    this.billboard = new MyBillboard(this, 10, -5.9, 2);
+
+    this.groupTrees = new MyTreeGroupPatch(this, 7, -5.9, 1);
+
+    this.rowTrees = new MyTreeRowPatch(this, 12, -5.9, -2.4);
+
+    this.objects = [
+      this.sphere, this.panorama, this.bird,
+      this.terrain, this.egg, this.nest,
+      this.billboard, this.groupTrees, this.rowTrees
+    ];
 
     this.eggList = [];
 
@@ -87,9 +101,9 @@ export class MyScene extends CGFscene {
       this.eggList.push(new MyBirdEgg(this, 30, 20));
     }
 
-    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Terrain': 3, 'Egg': 4, 'Nest': 5};
+    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Terrain': 3, 'Egg': 4, 'Nest': 5, 'Billboard': 6};
 
-    //Objects connected to MyInterface
+    //Objects conn´ected to MyInterface
     this.displayAxis = false;
     this.scaleFactor = 1;
     this.selectedObject = 2;
@@ -185,7 +199,9 @@ export class MyScene extends CGFscene {
       }
 
       this.nest.display();
-      
+       
+      this.groupTrees.display();  
+      this.rowTrees.display();
     }
 
     //Draw Bird
@@ -210,6 +226,11 @@ export class MyScene extends CGFscene {
     //Draw Nest
     if (this.selectedObject == 5){
 
+      this.objects[this.selectedObject].display();
+    }
+
+    //Draw Billboard
+    if (this.selectedObject == 6){
       this.objects[this.selectedObject].display();
     }
 
