@@ -4,33 +4,35 @@
 
 ## Project
 
-### Exercise 1
+### Phase 1 - Creating a Sphere
 
 - The main goal of this exercise was to create a sphere using a variable number of slices and stacks. After that, we had also to apply a a texture on it.
 - This was not difficult at all- if we analysed the exercise carefully, this one was preety similar to the creation of a prism in TP3, also using slices and stacks. However, there was a small difference on this task, which was the increment of the vertices- they were varying in 180 degrees and 90 degrees, in slices and stacks respectively. Finally, we had to apply the texture given, using the techniques learnt in the previous TP classes, which there were no difficulties. As a result, we completed this task successfully.
 
-### Exercise 2
+### Phase 2 - Panorama Creation
 
 - In this exercise we had to create a panorama, using the sphere created in the previous exercise. What we needed to do was to invert the the normal vectores and the sphere's vertices, so that we could see to the its interior, besides the addition of another texture. Then, we had to apply the tranformations in order to make it bigger and also position with the coordinates of the scene's camera, using the techniques learnt in the first TP classes. The result is shown below:
 
 ![Panorama 1](./screenshots/project-t01g01-1.png)
 
 
-## Exercise 3
+### Phase 3 - The Bird
 
-- In this part, we had to create a bird that will be living in our world. In order to do that, we created each bird's parts (wing, body, etc.), which consisted in the joint of basic objects, such as spheres, triangles and rectangles. In addition of that, we also created a texture to it. The bird is shown below:
+- In this phase, we developed a Bird object composed of simpler objects (namely eyes, neck, beak, wings, torso, tail and head). The wings are composed of a triangle and a rectangle. The eyes, body and head use the same sphere (with different scaling adjustments). The tail is a triangle, the beak is a cone and the neck is a cylinder. We also added a texture to the bird, making it look like the image below:
 
 ![Bird](./screenshots/project-t01g01-2.png)
 
-- Its movement is under development by now.
+- After having our bird model, we started working on its animations. We started by developing the vertical oscillation the bird suffers while flying, making it move slightly up and down as a whole in a movement that is repeated every second. We also animated the wings and tail to simulate the flight of a real bird, by rotating each body part, using an algorithm that calculates the position of each body part considering the time elapsed since the app has been started. The wings also fold slightly in the middle.
 
-## Exercise 4
+- The bird's movement is under development.
+
+## Phase 4 - Terrain
 
 - In this part, we had to create a terrain that will substitute the existent plane. Even though this terrain is based on the plane, we had to modify it in order to give the perspective of elevation. In order to do that we had to create a vert and a frag shader so that we could modify the colors and the vertexs' positions. The result is shown below:
 
 ![Terrain](./screenshots/project-t01g01-3.png)
 
-## Exercise 5
+## Phase 5 - The Eggs
 
 - In this part, we had to integrate a couple of eggs and the bird's nest in the terrain. In order to do that, we decided to make this aproach:
 
