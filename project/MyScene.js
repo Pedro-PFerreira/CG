@@ -240,5 +240,24 @@ export class MyScene extends CGFscene {
     var timeSinceAppStart= (t-this.appStartTime)/1000.0; //in seconds
     this.bird.update(timeSinceAppStart);
     this.bird.display();
+    this.checkKeys();
+  }
+
+  checkKeys(){
+    var text = "Keys pressed: ";
+    var keysPressed = false;
+
+    // Check for key codes e.g. in https://keycode.info/
+    if (this.gui.isKeyPressed("KeyW")) {
+      text+=" W ";
+      keysPressed=true;
+    }
+    if (this.gui.isKeyPressed("KeyS")) {
+      text+=" S ";
+      keysPressed=true;
+    }
+    if (keysPressed)
+      console.log(text);
+  
   }
 }

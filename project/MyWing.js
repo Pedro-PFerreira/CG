@@ -33,7 +33,6 @@ export class MyWing extends CGFobject{
         
         this.scene.pushMatrix();
         this.scene.translate(0.41,-1,0);
-        console.log(this.animVal);
         this.scene.rotate(Math.PI/2, 1, 0, 0);
         //this.scene.rotate(Math.PI/6, 0,1,0);
         this.scene.rotate(Math.PI/6 * this.animVal * 4.5, 0,1,0);
