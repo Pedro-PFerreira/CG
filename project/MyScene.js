@@ -87,7 +87,7 @@ export class MyScene extends CGFscene {
       this.eggList.push(new MyBirdEgg(this, 30, 20));
     }
 
-    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Terrain': 3, 'Egg': 4, 'Nest': 5};
+    this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Terrain + Bird': 3, 'Egg': 4, 'Nest': 5};
 
     //Objects connected to MyInterface
     this.displayAxis = false;
@@ -161,6 +161,7 @@ export class MyScene extends CGFscene {
 
     //Draw Head
     if (this.selectedObject == 3){
+      this.setActiveShader(this.defaultShader);
       this.bird.display();
       this.panorama.display();
     }

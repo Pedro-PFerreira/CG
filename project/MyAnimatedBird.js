@@ -8,6 +8,11 @@ export class MyAnimatedBird extends CGFobject{
         this.obj = new MyBird(scene, textures);
         this.animVal = 0;
         this.elapsedTimeSecs;
+
+        //Movement
+        this.moveSpeed = 0;
+        this.rotationAngle = 0; //in radians 
+        this.position = [0,0,0];
     }
 
     update(timeSinceAppStart){
@@ -21,13 +26,20 @@ export class MyAnimatedBird extends CGFobject{
         else if (this.elapsedTimeSecs > 0.5 && this.elapsedTimeSecs < 1){
           this.animVal = 1 - this.elapsedTimeSecs;
         }
+
+        this.position[0] += this.moveSpeed * Math.cos(this.rotationAngle); //x
+        this.position[2] += this.moveSpeed * Math.sin(this.rotationAngle); //z
+
+        console.log(this.position);
+
         this.obj.update(timeSinceAppStart);
     }
 
     display()
     {
         this.scene.pushMatrix();
-        this.scene.translate(0,this.animVal*2,0);
+        this.scene.rotate(this.rotationAngle,0,1,0);
+        this.scene.translate(-this.position[0],this.animVal*2,-this.position[2]);
         this.obj.display();
         this.scene.popMatrix();
     }
