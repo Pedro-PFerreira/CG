@@ -13,6 +13,7 @@ export class MyAnimatedBird extends CGFobject{
         this.moveSpeed = 0;
         this.rotationAngle = 0; //in radians 
         this.position = [0,0,0];
+        this.maxSpeed = 5;
     }
 
     update(timeSinceAppStart){
@@ -30,7 +31,7 @@ export class MyAnimatedBird extends CGFobject{
         this.position[0] += this.moveSpeed * Math.cos(this.rotationAngle); //x
         this.position[2] += this.moveSpeed * Math.sin(this.rotationAngle); //z
 
-        console.log(this.position);
+        console.log(this.moveSpeed);
 
         this.obj.update(timeSinceAppStart);
     }
@@ -38,9 +39,34 @@ export class MyAnimatedBird extends CGFobject{
     display()
     {
         this.scene.pushMatrix();
+        this.scene.translate(this.position[0],this.animVal*2,this.position[2]);
         this.scene.rotate(this.rotationAngle,0,1,0);
-        this.scene.translate(-this.position[0],this.animVal*2,-this.position[2]);
         this.obj.display();
         this.scene.popMatrix();
+    }
+
+    turn(v){
+      this.rotationAngle += v;
+    }
+
+    accelerate(v){
+      if(this.moveSpeed + v < this.maxSpeed && this.moveSpeed + v > -this.maxSpeed){
+        this.moveSpeed += v;
+      }
+    }
+
+    resetPos(){
+      this.position = [0,0,0];
+      this.rotationAngle = 0;
+      this.moveSpeed = 0;
+    }
+
+    slow(){
+      if (this.moveSpeed > 0){
+        this.moveSpeed -= 0.5;
+      }
+      else if (this.moveSpeed < 0){
+        this.moveSpeed += 0.5;
+      }
     }
 }
