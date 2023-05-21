@@ -1,6 +1,6 @@
 import { CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
 import {CGFobject} from '../lib/CGF.js';
-import { MyPlane } from './MyPlane.js';
+
 /**
 * MyTerrain
 * @constructor
@@ -54,7 +54,6 @@ export class MyTerrain extends CGFobject {
         this.texture1 = new CGFtexture(scene, "images/altimetry.png");
         this.texture2 = new CGFtexture(scene, "images/heightmap_modified_2.jpg");
         this.texture3 = new CGFtexture(scene, "images/terrain.jpg");
-        
 
         scene.pushMatrix();
     }

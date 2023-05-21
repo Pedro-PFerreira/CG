@@ -1,4 +1,4 @@
-import {CGFappearance,CGFobject} from '../lib/CGF.js';
+import {CGFappearance,CGFobject, CGFtexture, CGFshader} from '../lib/CGF.js';
 import { MyQuad } from './MyQuad.js';
 /**
  * MyBillboard
@@ -18,9 +18,8 @@ export class MyBillboard extends CGFobject {
 
         this.textureIndex = this.getRandomIntInclusive(1,3);
 
-        console.log(this.textureIndex);
-
         this.initMaterials();
+        this.initShaders();
         this.display();
 	}
 
@@ -43,6 +42,17 @@ export class MyBillboard extends CGFobject {
         this.billboardTexture3.loadTexture('images/billboardtree_3.png');
         this.billboardTexture3.setTextureWrap('REPEAT', 'REPEAT');
 
+        this.height_texture = new CGFtexture(this.scene, "images/heightmap_modified_2.jpg");
+        
+    }
+
+    initShaders(){
+        this.scene.testShaders = [new CGFshader(this.scene.gl, "shaders/tree.vert")];
+
+        this.scene.testShaders[0].setUniformsValues({terrainSize: 512, 
+            treePosition: [this.x,this.y, this.z]
+        });
+
     }
 
     getRandomIntInclusive(min, max) {
@@ -50,6 +60,7 @@ export class MyBillboard extends CGFobject {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
     }
+
 
     display(){
 
@@ -65,6 +76,8 @@ export class MyBillboard extends CGFobject {
 
         let angle = Math.acos((vec3.dot(quad_normals, camera_pos))* (Math.PI/180));
         let rot_axis = [0,0,1];
+
+        this.height_map = this.scene.gl;
 
         vec3.cross(rot_axis, quad_normals, camera_pos);
         this.scene.pushMatrix();
