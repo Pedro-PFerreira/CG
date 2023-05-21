@@ -92,6 +92,7 @@ export class MyScene extends CGFscene {
     //Objects connected to MyInterface
     this.displayAxis = false;
     this.scaleFactor = 1;
+    this.speedFactor = 1;
     this.selectedObject = 2;
     this.displayObject = true;
     this.displayNormals = false;
@@ -239,7 +240,7 @@ export class MyScene extends CGFscene {
 
   update(t){
     var timeSinceAppStart= (t-this.appStartTime)/1000.0; //in seconds
-    this.bird.update(timeSinceAppStart);
+    this.bird.update(timeSinceAppStart, this.scaleFactor, this.speedFactor);
     this.bird.display();
     this.checkKeys();
   }
@@ -274,9 +275,14 @@ export class MyScene extends CGFscene {
       this.bird.resetPos();
       keysPressed=true;
     }
-    if (this.gui.isKeyPressed("KeyT")) {
+    if (this.gui.isKeyPressed("KeyT")) { //For testing purposes only
       text+=" T ";
       this.bird.resetRotation();
+      keysPressed=true;
+    }
+    if (this.gui.isKeyPressed("KeyP")){
+      text+=" T ";
+      //IMPLEMENT DIVE
       keysPressed=true;
     }
     if (!keysPressed)
