@@ -1,4 +1,4 @@
-import {CGFappearance,CGFobject} from '../lib/CGF.js';
+import {CGFappearance,CGFobject, CGFtexture, CGFshader} from '../lib/CGF.js';
 import { MyQuad } from './MyQuad.js';
 /**
  * MyBillboard
@@ -18,12 +18,14 @@ export class MyBillboard extends CGFobject {
 
         this.textureIndex = this.getRandomIntInclusive(1,3);
 
-        console.log(this.textureIndex);
-
         this.initMaterials();
         this.display();
 	}
 
+
+    /**
+     * This initializes the textures for the trees.
+     */
     initMaterials(){
         this.billboardTexture1 = new CGFappearance(this.scene);
         this.billboardTexture1.setEmission(1,1,1,1);
@@ -43,14 +45,27 @@ export class MyBillboard extends CGFobject {
         this.billboardTexture3.loadTexture('images/billboardtree_3.png');
         this.billboardTexture3.setTextureWrap('REPEAT', 'REPEAT');
 
+        this.height_texture = new CGFtexture(this.scene, "images/heightmap_modified_2.jpg");
+        
     }
 
+    /**
+     * The function will generate the positions for the trees within the boundaries defined 
+     * by min and max
+     * @param min 
+     * @param max 
+     * @returns 
+     */
     getRandomIntInclusive(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
     }
 
+    /**
+	* This method displays a tree, after making the necessary operations to be 
+	* in the correct position;
+	*/
     display(){
 
         //Quad's Normal vector 
@@ -95,6 +110,9 @@ export class MyBillboard extends CGFobject {
 		this.updateTexCoordsGLBuffers();
 	}
 
+    /**
+     * This method updates the buffers to draw the Tree in the scene.
+     */
     updateBuffers(){
         this.initBuffers();
         this.initNormalVizBuffers();

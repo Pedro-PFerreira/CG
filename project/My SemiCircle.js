@@ -20,6 +20,9 @@ export class MySemiCircle extends CGFobject {
 
     }
 
+    /**
+     * SemiCircle's initialization.
+     */
     initBuffers(){
         this.vertices = [];
         this.indices = [];
@@ -131,6 +134,9 @@ export class MySemiCircle extends CGFobject {
 
     }
 
+    /**
+     * This method updates the buffers to draw the Semi-circle in the scene.
+     */
     updateBuffers(complexity){
        
         // reinitialize buffers

@@ -18,7 +18,9 @@ export class MyNest extends CGFobject {
 
     }
 
-
+    /**
+    * This initializes the materials for the nest.
+    */
     initMaterials(){
 
         this.nestTexture = new CGFappearance(this.scene);
@@ -29,6 +31,10 @@ export class MyNest extends CGFobject {
 
     }
 
+    /**
+	* This method displays the nest, after making the necessary operations to be 
+	* in the correct position;
+	*/
     display(){
 
         this.scene.pushMatrix();
@@ -40,6 +46,10 @@ export class MyNest extends CGFobject {
         this.scene.popMatrix();
     }
 
+
+    /**
+    * This method updates the buffers to draw the nest in the scene.
+    */
     updateBuffers(complexity){
        
         // reinitialize buffers

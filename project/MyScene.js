@@ -199,7 +199,6 @@ export class MyScene extends CGFscene {
       }
 
       this.nest.display();
-       
       this.groupTrees.display();  
       this.rowTrees.display();
     }
