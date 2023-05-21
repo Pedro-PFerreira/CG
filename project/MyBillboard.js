@@ -19,10 +19,13 @@ export class MyBillboard extends CGFobject {
         this.textureIndex = this.getRandomIntInclusive(1,3);
 
         this.initMaterials();
-        this.initShaders();
         this.display();
 	}
 
+
+    /**
+     * This initializes the textures for the trees.
+     */
     initMaterials(){
         this.billboardTexture1 = new CGFappearance(this.scene);
         this.billboardTexture1.setEmission(1,1,1,1);
@@ -46,22 +49,23 @@ export class MyBillboard extends CGFobject {
         
     }
 
-    initShaders(){
-        this.scene.testShaders = [new CGFshader(this.scene.gl, "shaders/tree.vert")];
-
-        this.scene.testShaders[0].setUniformsValues({terrainSize: 512, 
-            treePosition: [this.x,this.y, this.z]
-        });
-
-    }
-
+    /**
+     * The function will generate the positions for the trees within the boundaries defined 
+     * by min and max
+     * @param min 
+     * @param max 
+     * @returns 
+     */
     getRandomIntInclusive(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
     }
 
-
+    /**
+	* This method displays a tree, after making the necessary operations to be 
+	* in the correct position;
+	*/
     display(){
 
         //Quad's Normal vector 
@@ -76,8 +80,6 @@ export class MyBillboard extends CGFobject {
 
         let angle = Math.acos((vec3.dot(quad_normals, camera_pos))* (Math.PI/180));
         let rot_axis = [0,0,1];
-
-        this.height_map = this.scene.gl;
 
         vec3.cross(rot_axis, quad_normals, camera_pos);
         this.scene.pushMatrix();
@@ -108,6 +110,9 @@ export class MyBillboard extends CGFobject {
 		this.updateTexCoordsGLBuffers();
 	}
 
+    /**
+     * This method updates the buffers to draw the Tree in the scene.
+     */
     updateBuffers(){
         this.initBuffers();
         this.initNormalVizBuffers();

@@ -15,6 +15,9 @@ export class MyPanorama extends CGFobject {
         this.panorama = new MySphere(this.scene, slices, stacks, true);
 	}
 
+	/**
+    * This initializes the materials for the terrain.
+    */
 	initMaterials(scene, texture){
 		this.panoramaAppearance = new CGFappearance(scene);
 
@@ -27,6 +30,10 @@ export class MyPanorama extends CGFobject {
         this.panoramaAppearance.setTextureWrap('REPEAT', 'REPEAT');
 	}
 
+	/**
+	* This method displays the panorama, after making the necessary operations to be 
+	* in the correct position;
+	*/
 	display() {
 
 		var translatepanorama = [
@@ -52,10 +59,11 @@ export class MyPanorama extends CGFobject {
 		this.scene.popMatrix();
 	}
 
-	updateBuffers(complexity){
-        //this.slices = 4 + Math.round(8 * complexity); //complexity varies 0-1, so slices varies 3-12
 
-        // reinitialize buffers
+	/**
+    * This method updates the buffers to draw the panorama in the scene.
+    */
+	updateBuffers(complexity){
         this.initBuffers();
         this.initNormalVizBuffers();
     }

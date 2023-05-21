@@ -23,6 +23,9 @@ export class MyBirdEgg extends CGFobject {
 
     }
 
+    /**
+     * This initializes the textures for the eggs.
+     */
     initMaterials(){
 
         this.eggTexture = new CGFappearance(this.scene);
@@ -33,12 +36,23 @@ export class MyBirdEgg extends CGFobject {
 
     }
 
+    /**
+     * The function will generate the positions for the eggs within the boundaries defined 
+     * by min and max
+     * @param min 
+     * @param max 
+     * @returns 
+     */
     getRandomIntInclusive(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
     }
 
+    /**
+	* This method displays an egg, after making the necessary operations to be 
+	* in the correct position;
+	*/
     display(){
 
         this.scene.pushMatrix();
@@ -52,6 +66,9 @@ export class MyBirdEgg extends CGFobject {
 
     }
 
+    /**
+     * This method updates the buffers to draw the egg in the scene.
+     */
     updateBuffers(){
         this.initBuffers();
         this.initNormalVizBuffers();

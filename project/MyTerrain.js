@@ -16,6 +16,9 @@ export class MyTerrain extends CGFobject {
         this.initTextures(this.scene);
 	}
 
+    /**
+    * This initializes the materials for the terrain.
+    */
     initMaterials(scene){
         this.terrainMaterial1 = new CGFappearance(scene);
         this.terrainMaterial1.setAmbient(1, 1, 1, 1);
@@ -37,6 +40,9 @@ export class MyTerrain extends CGFobject {
 
     }
 
+    /**
+    * This initializes the textures for terrain's shaders.
+    */
     initTextures(scene){
 
         scene.gl.clearDepth(10000.0);
@@ -58,6 +64,10 @@ export class MyTerrain extends CGFobject {
         scene.pushMatrix();
     }
 
+    /**
+	* This method displays the scene's terrain, after making the necessary operations to be 
+	* in the correct position;
+	*/
 	display(){
         this.scene.pushMatrix();
         this.scene.translate(0,-100,0);
@@ -71,6 +81,9 @@ export class MyTerrain extends CGFobject {
         this.scene.popMatrix();
     }
 
+    /**
+    * This method updates the buffers to draw the terrain in the scene.
+    */
     updateBuffers(){
         this.initBuffers();
         this.initNormalVizBuffers();

@@ -33,6 +33,14 @@ export class MyTreeRowPatch extends CGFobject {
         return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
     }
 
+    /**
+    * The method will join the various trees, put them in a row. The tree's 
+    * coordinates are generated according to the first one, given in the parameters
+    * x,y and z.
+    * @param {*} x 
+    * @param {*} y 
+    * @param {*} z 
+    */
     aggregate(x,y,z){
 
         let offset;
@@ -45,6 +53,10 @@ export class MyTreeRowPatch extends CGFobject {
     
     }
 
+    /**
+	* This method displays the tree row patch, after making the necessary operations to be 
+	* in the correct position;
+	*/
     display(){
         
         for (let i = 0; i < this.trees.length; i++){
@@ -62,6 +74,9 @@ export class MyTreeRowPatch extends CGFobject {
 		this.updateTexCoordsGLBuffers();
 	}
 
+    /**
+    * This method updates the buffers to draw the tree row in the scene.
+    */
     updateBuffers(){
         this.initBuffers();
         this.initNormalVizBuffers();

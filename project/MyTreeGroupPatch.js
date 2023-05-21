@@ -19,6 +19,9 @@ export class MyTreeGroupPatch extends CGFobject {
         this.display();
 	}
 
+    /**
+    * This initializes the materials for the tree group patch.
+    */
     initMaterials(){
         this.billboardTexture = new CGFappearance(this.scene);
         this.billboardTexture.setEmission(1,1,1,1);
@@ -27,12 +30,27 @@ export class MyTreeGroupPatch extends CGFobject {
         this.billboardTexture.setTextureWrap('REPEAT', 'REPEAT');
     }
 
+    /**
+     * The function will generate the positions for the trees within the boundaries defined 
+     * by min and max
+     * @param min 
+     * @param max 
+     * @returns 
+     */
     getRandomIntInclusive(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
     }
 
+    /**
+    * The method will join the various trees, put them in a group. The tree's 
+    * coordinates are generated according to the first one, given in the parameters
+    * x,y and z.
+    * @param {*} x 
+    * @param {*} y 
+    * @param {*} z 
+    */
     aggregate(x,y,z){
 
         let offset;
@@ -47,6 +65,10 @@ export class MyTreeGroupPatch extends CGFobject {
     
     }
 
+    /**
+	* This method displays the tree group patch, after making the necessary operations to be 
+	* in the correct position;
+	*/
     display(){
         
         for (let i = 0; i < this.trees.length; i++){
@@ -64,6 +86,9 @@ export class MyTreeGroupPatch extends CGFobject {
 		this.updateTexCoordsGLBuffers();
 	}
 
+    /**
+    * This method updates the buffers to draw the tree group patch in the scene.
+    */
     updateBuffers(){
         this.initBuffers();
         this.initNormalVizBuffers();
