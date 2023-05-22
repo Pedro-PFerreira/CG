@@ -105,8 +105,8 @@ export class MyAnimatedBird extends CGFobject{
         this.moveSpeed += v * this.speedFactor;
       }
       */
-      this.position[2] -= Math.sin(this.rotationAngle); //z
-      this.position[0] += Math.cos(this.rotationAngle); //x
+      this.position[2] -= Math.sin(this.rotationAngle) * this.speedFactor; //z
+      this.position[0] += Math.cos(this.rotationAngle) * this.speedFactor; //x
     }
 
     resetPos(){
