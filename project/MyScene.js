@@ -107,7 +107,7 @@ export class MyScene extends CGFscene {
     this.displayAxis = false;
     this.scaleFactor = 1;
     this.speedFactor = 1;
-    this.selectedObject = 3;
+    this.selectedObject = 1;
     this.displayObject = true;
     this.displayNormals = false;
 
@@ -199,6 +199,8 @@ export class MyScene extends CGFscene {
         
         this.eggList[i].display();
       }
+
+      this.bird.display();
 
       this.nest.display();
       this.groupTrees.display();  
