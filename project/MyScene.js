@@ -335,7 +335,12 @@ export class MyScene extends CGFscene {
       //console.log(text);
     }
     }
-
+    /**
+     * This calculates a distance between two points
+     * @param {Array} p1 Point 1 
+     * @param {Array} p2 Point 2
+     * @returns {int} Distance
+     */
     calculate_distance(p1,p2){
       return Math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2 + (p1[2] - p2[2]) ** 2)
     }

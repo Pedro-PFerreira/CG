@@ -39,7 +39,9 @@ export class MyBird extends CGFobject{
         this.parts = [this.wing,this.eye,this.head,this.torso,this.neck,this.beak,this.tail];
         this.animVal = 0;
 	}
-
+  /**
+   * This displays the MyBird Object
+   */
   display(){
     this.scene.pushMatrix();
     this.scene.translate(0,3,0);
@@ -114,7 +116,11 @@ export class MyBird extends CGFobject{
     this.initBuffers();
     this.initNormalVizBuffers();
   }
-
+  /**
+   * This updates the MyBird Object constantly
+   * @param {*} timeSinceAppStart 
+   * @param {*} speedFactor 
+   */
   update(timeSinceAppStart, speedFactor){
     this.speedFactor = speedFactor;
     this.elapsedTimeSecs = (timeSinceAppStart * this.speedFactor) % 1;

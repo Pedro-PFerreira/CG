@@ -14,7 +14,9 @@ export class MyTail extends CGFobject{
         //Pena 2
         this.feather2 = new MyTriangle(this.scene);
 	}
-
+  /**
+   * This displays the bird's tail
+   */
   display(){
 
 

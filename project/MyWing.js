@@ -45,7 +45,11 @@ export class MyWing extends CGFobject{
 
         this.scene.popMatrix();
     }
-
+    /**
+     * This updates the wings constantly according to the time elapsed since app started
+     * @param {int} timeSinceAppStart Time since the app started 
+     * @param {int} speedFactor Adjustable By The User Effecting Animation Speed 
+     */
     update(timeSinceAppStart, speedFactor){
         this.speedFactor = speedFactor;
         this.elapsedTimeSecs = (timeSinceAppStart * this.speedFactor) % 1;
