@@ -60,7 +60,7 @@ export class MyAnimatedBird extends CGFobject{
     {
         this.scene.pushMatrix();
         //console.log([this.position[0],this.position[2]]);
-        this.scene.translate(this.position[0],this.animVal*2,this.position[2]);
+        this.scene.translate(this.position[0],this.animVal*2 - 30,this.position[2]);
         this.scene.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
         this.scene.rotate(this.rotationAngle,0,1,0);
         this.obj.display();

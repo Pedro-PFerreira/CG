@@ -144,7 +144,7 @@ export class MyScene extends CGFscene {
       //vec3.fromValues(0,0,0)
       //CORRECT VALUES BELOW
       vec3.fromValues(50, 10, 15),
-      vec3.fromValues(0, 0, 0)
+      vec3.fromValues(0, -50, 0)
     );
   }
   setDefaultAppearance() {
