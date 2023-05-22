@@ -107,7 +107,7 @@ export class MyScene extends CGFscene {
     this.displayAxis = false;
     this.scaleFactor = 1;
     this.speedFactor = 1;
-    this.selectedObject = 2;
+    this.selectedObject = 3;
     this.displayObject = true;
     this.displayNormals = false;
 
@@ -143,7 +143,7 @@ export class MyScene extends CGFscene {
       //vec3.fromValues(10,2,3),
       //vec3.fromValues(0,0,0)
       //CORRECT VALUES BELOW
-      vec3.fromValues(50, 10, 15),
+      vec3.fromValues(10, 30, -30),
       vec3.fromValues(0, -50, 0)
     );
   }
@@ -301,8 +301,8 @@ export class MyScene extends CGFscene {
       keysPressed=true;
     }
     if (this.gui.isKeyPressed("KeyP")){
-      text+=" T ";
-      //IMPLEMENT DIVE
+      text+=" P ";
+      this.bird.trigger_dive();
       keysPressed=true;
     }
     else {

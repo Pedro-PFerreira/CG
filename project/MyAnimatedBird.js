@@ -11,13 +11,17 @@ export class MyAnimatedBird extends CGFobject{
 
         //Movement
         this.rotationAngle = 0; //in radians 
-        this.position = [0,0,0];
+        this.position = [0,-50,0];
         this.maxSpeed = 1;
         this.accelerating = false;
 
         //Speed and Scaling
         this.scaleFactor = 1;
         this.speedFactor = 1;
+
+        //Diving
+        this.lowering = false;
+        this.rising = false;
     }
 
     update(timeSinceAppStart, scaleFactor, speedFactor){
@@ -38,10 +42,19 @@ export class MyAnimatedBird extends CGFobject{
 
         //this.rotationAngle = this.normalize_angle(this.rotationAngle);
 
-        console.log(this.rotationAngle * 180 / Math.PI);
 
         if(this.accelerating){
           this.accelerate();
+        }
+        console.log("Y = " + this.position[1])
+        if(this.lowering){
+          console.log("Going down...")
+          this.lower(this.speedFactor * 0.5);
+        }
+        
+        else if(this.rising){
+          console.log("Going up...")
+          this.rise(this.speedFactor * 0.5);
         }
 
         //this.normalize_position();
@@ -56,11 +69,36 @@ export class MyAnimatedBird extends CGFobject{
       this.accelerating = v;
     }
 
+    trigger_dive(){
+      this.lowering = true;
+    }
+
+    rise(v){
+      if(this.position[1] + v < -50){
+        this.position[1] += v;
+      }
+      else{
+        this.position[1] = -50;
+        this.rising = false;
+      }
+    }
+
+    lower(v){
+      if(this.position[1] - v > -62.5){
+        this.position[1] -= v;
+      }
+      else{
+        this.position[1] = -62.5;
+        this.lowering = false;
+        this.rising = true;
+      }
+    }
+
     display()
     {
         this.scene.pushMatrix();
         //console.log([this.position[0],this.position[2]]);
-        this.scene.translate(this.position[0],this.animVal*2 - 30,this.position[2]);
+        this.scene.translate(this.position[0],this.position[1] + this.animVal*2,this.position[2]);
         this.scene.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
         this.scene.rotate(this.rotationAngle,0,1,0);
         this.obj.display();
