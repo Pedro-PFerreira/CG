@@ -272,12 +272,12 @@ export class MyScene extends CGFscene {
     // Check for key codes e.g. in https://keycode.info/
     if (this.gui.isKeyPressed("KeyW")) {
       text+=" W ";
-      this.bird.accelerate(0.5);
+      this.bird.toggle_acceleration(true);
       keysPressed=true;
     }
     if (this.gui.isKeyPressed("KeyS")) {
       text+=" S ";
-      this.bird.accelerate(-0.5);
+      this.bird.toggle_acceleration(false);
       keysPressed=true;
     }
     if (this.gui.isKeyPressed("KeyA")) {
