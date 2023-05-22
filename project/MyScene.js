@@ -126,11 +126,11 @@ export class MyScene extends CGFscene {
       0.1,
       1000,
       //CAMERA VALUES FOR TESTING BIRD
-      vec3.fromValues(10,2,3),
-      vec3.fromValues(0,0,0)
+      //vec3.fromValues(10,2,3),
+      //vec3.fromValues(0,0,0)
       //CORRECT VALUES BELOW
-      //vec3.fromValues(50, 10, 15),
-      //vec3.fromValues(0, 0, 0)
+      vec3.fromValues(50, 10, 15),
+      vec3.fromValues(0, 0, 0)
     );
   }
   setDefaultAppearance() {
