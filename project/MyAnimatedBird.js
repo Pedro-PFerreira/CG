@@ -10,7 +10,6 @@ export class MyAnimatedBird extends CGFobject{
         this.elapsedTimeSecs;
 
         //Movement
-        this.moveSpeed = 0;
         this.rotationAngle = 0; //in radians 
         this.position = [0,0,0];
         this.maxSpeed = 1;
@@ -45,15 +44,10 @@ export class MyAnimatedBird extends CGFobject{
           this.accelerate();
         }
 
-        console.log("HERE:" + this.position);
-        console.log("HERE:" + this.rotationAngle);
-
         //this.normalize_position();
-        //this.position[0] = this.position[0];//* this.moveSpeed;
-        //this.position[1] = this.position[1]; //* this.moveSpeed;
-        //this.position[2] = this.position[2]; //* this.moveSpeed;
-        
-        console.log("moveSpeed: " + this.moveSpeed);
+        //this.position[0] = this.position[0];
+        //this.position[1] = this.position[1];
+        //this.position[2] = this.position[2];
 
         this.obj.update(timeSinceAppStart, this.speedFactor);
     }
@@ -99,12 +93,6 @@ export class MyAnimatedBird extends CGFobject{
     }
 
     accelerate(){
-      /**
-      console.log("ACCELERATING");
-      if(this.moveSpeed + v < this.maxSpeed && this.moveSpeed + v > -this.maxSpeed){
-        this.moveSpeed += v * this.speedFactor;
-      }
-      */
       this.position[2] -= Math.sin(this.rotationAngle) * this.speedFactor; //z
       this.position[0] += Math.cos(this.rotationAngle) * this.speedFactor; //x
     }
@@ -112,7 +100,7 @@ export class MyAnimatedBird extends CGFobject{
     resetPos(){
       this.position = [0,0,0];
       this.rotationAngle = 0;
-      this.moveSpeed = 0;
+      this.accelerating = false;
     }
 
     resetRotation(){ //For testing purposes only
