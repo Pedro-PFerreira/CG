@@ -24,7 +24,9 @@
 
 - After having our bird model, we started working on its animations. We started by developing the vertical oscillation the bird suffers while flying, making it move slightly up and down as a whole in a movement that is repeated every second. We also animated the wings and tail to simulate the flight of a real bird, by rotating each body part, using an algorithm that calculates the position of each body part considering the time elapsed since the app has been started. The wings also fold slightly in the middle.
 
-- The bird's movement is under development.
+- The bird's movement was done using the trigonometric circle logic, multiplying the vector by the speed factor which can be manually adjusted by the user. This value also effects the animations. the dive movement was also implemented, working either when the bird is accelerating or when it's not moving. Lastly, the speed factor also effects the rotation speed.
+
+- As for the interaction between the bird and the eggs, we had some trouble implementing the way the bird picks the egg from the ground and the way it drops it, mainly because of some errors in the array where the eggs were stored.
 
 ## Phase 4 - Terrain
 
@@ -57,7 +59,7 @@
 
 - The final movement of the bird is still under development.
 
-## Exercise 6
+## Phase 6 - Trees
 
 - In this part we had to create trees in order to make a forest. This process was not difficult.
 
