@@ -14,6 +14,7 @@ export class MyWing extends CGFobject{
         this.wingMiddle = new MyRectangle(this.scene);
         this.timeSinceAppStart = 0;
         this.animVal = 1;
+        this.speedFactor = 1;
     }
 
     display(){
@@ -45,8 +46,9 @@ export class MyWing extends CGFobject{
         this.scene.popMatrix();
     }
 
-    update(timeSinceAppStart){
-        this.elapsedTimeSecs = timeSinceAppStart % 1;
+    update(timeSinceAppStart, speedFactor){
+        this.speedFactor = speedFactor;
+        this.elapsedTimeSecs = (timeSinceAppStart * this.speedFactor) % 1;
         if(this.elapsedTimeSecs == 0.0 || this.elapsedTimeSecs == 0.5 || this.elapsedTimeSecs == 1.0){
             this.animVal = 0.0;
           }

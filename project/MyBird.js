@@ -33,6 +33,8 @@ export class MyBird extends CGFobject{
         //Cauda
         this.tail = new MyTail(this.scene);
 
+        this.speedFactor = 1;
+
         this.parts = [this.wing,this.eye,this.head,this.torso,this.neck,this.beak,this.tail];
         this.animVal = 0;
 	}
@@ -112,8 +114,9 @@ export class MyBird extends CGFobject{
     this.initNormalVizBuffers();
   }
 
-  update(timeSinceAppStart){
-    this.elapsedTimeSecs = timeSinceAppStart % 1;
+  update(timeSinceAppStart, speedFactor){
+    this.speedFactor = speedFactor;
+    this.elapsedTimeSecs = (timeSinceAppStart * this.speedFactor) % 1;
         if(this.elapsedTimeSecs == 0.0 || this.elapsedTimeSecs == 0.5 || this.elapsedTimeSecs == 1.0){
             this.animVal = 0.0;
           }
@@ -123,6 +126,6 @@ export class MyBird extends CGFobject{
           else if (this.elapsedTimeSecs > 0.5 && this.elapsedTimeSecs < 1){
             this.animVal = 1 - this.elapsedTimeSecs;
           }
-    this.wing.update(timeSinceAppStart);
+    this.wing.update(timeSinceAppStart, this.speedFactor);
   }
 }
