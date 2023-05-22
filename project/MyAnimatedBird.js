@@ -106,19 +106,4 @@ export class MyAnimatedBird extends CGFobject{
     resetRotation(){ //For testing purposes only
       this.rotationAngle = 0;
     }
-
-    slow(){
-      if (this.moveSpeed > 0){
-        this.moveSpeed -= 0.5 * this.speedFactor;
-      }
-      else if (this.moveSpeed < 0){
-        this.moveSpeed += 0.5 * this.speedFactor;
-      }
-      if (this.rotationAngle >= Math.PI * 2){
-        this.rotationAngle -= Math.PI*2;
-      }
-      else if (this.rotationAngle < 0){
-        this.rotationAngle += Math.PI*2;
-      }
-    }
 }

@@ -305,10 +305,6 @@ export class MyScene extends CGFscene {
       //IMPLEMENT DIVE
       keysPressed=true;
     }
-    if (!keysPressed)
-      //text += "None";
-      //console.log(text);
-      this.bird.slow();
     else {
       //console.log(text);
     }
