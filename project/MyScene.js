@@ -200,6 +200,8 @@ export class MyScene extends CGFscene {
         this.eggList[i].display();
       }
 
+      this.bird.display();
+
       this.nest.display();
       this.groupTrees.display();  
       this.rowTrees.display();
@@ -305,6 +307,12 @@ export class MyScene extends CGFscene {
       //IMPLEMENT DIVE
       keysPressed=true;
     }
+    if (this.gui.isKeyPressed("KeyO")){
+      text+= " O ";
+
+      keysPressed=true;
+    }
+
     if (!keysPressed)
       //text += "None";
       //console.log(text);

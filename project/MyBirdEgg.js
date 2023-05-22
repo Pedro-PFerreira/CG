@@ -19,8 +19,22 @@ export class MyBirdEgg extends CGFobject {
 
         this.z = this.getRandomIntInclusive(-15,-6);
 
+        this.y = -62.5; // Reference value for the height of the highplane + center os the egg
+
         this.angle_rot = this.getRandomIntInclusive(0, 360);
 
+    }
+
+    setCoordinates(x,y,z){
+        this.x = x;
+
+        this.y = y;
+
+        this.z = z;
+    }
+
+    getCoordinates(){
+        return [this.x, this.y, this.z];
     }
 
     /**
@@ -56,8 +70,7 @@ export class MyBirdEgg extends CGFobject {
     display(){
 
         this.scene.pushMatrix();
-        var y = -62.5; // Reference value for the height of the highplane + center os the egg
-        this.scene.translate(this.x, y, this.z);
+        this.scene.translate(this.x, this.y, this.z);
         this.scene.rotate(this.angle_rot * (Math.PI / 180),1,0,0,0);
         this.scene.scale(0.75,1.5,1);     
         this.eggTexture.apply();
