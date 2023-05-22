@@ -103,7 +103,7 @@ export class MyScene extends CGFscene {
 
     this.objectIDs = {'Sphere': 0, 'Panorama': 1, 'Bird': 2, 'Terrain': 3, 'Egg': 4, 'Nest': 5, 'Billboard': 6};
 
-    //Objects conn´ected to MyInterface
+    //Objects connected to MyInterface
     this.displayAxis = false;
     this.scaleFactor = 1;
     this.speedFactor = 1;
@@ -263,8 +263,27 @@ export class MyScene extends CGFscene {
   update(t){
     var timeSinceAppStart= (t-this.appStartTime)/1000.0; //in seconds
     this.bird.update(timeSinceAppStart, this.scaleFactor, this.speedFactor);
+    this.pickEgg(); //constantly checks if bird is capable of picking an egg
     this.bird.display();
+    console.log("EggList: " + this.eggList);
     this.checkKeys();
+  }
+
+  pickEgg(){
+    if (!this.bird.hasEgg()){ //only if bird isn't carrying another egg
+      console.log("EGGS LEFT: " + this.eggList)
+      console.log("PICKED EGGS:" + this.bird.eggs)
+      for (const egg in this.eggList){
+        var egg_position = [this.egg.x,this.egg.y,this.egg.z]
+        if(this.calculate_distance(this.bird.position, egg_position) <= 4){
+          console.log("TOUCHED EGG: " + egg)
+          this.bird.add_egg(new MyBirdEgg(this, 30, 20,true));
+          var index = this.eggList.indexOf(egg);
+          this.eggList.splice(index,1);
+          break;
+        }
+      }
+    }
   }
 
   checkKeys(){
@@ -312,13 +331,12 @@ export class MyScene extends CGFscene {
 
       keysPressed=true;
     }
-
-    if (!keysPressed)
-      //text += "None";
-      //console.log(text);
-      this.bird.slow();
     else {
       //console.log(text);
     }
+    }
+
+    calculate_distance(p1,p2){
+      return Math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2 + (p1[2] - p2[2]) ** 2)
     }
 }

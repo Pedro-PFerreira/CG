@@ -20,11 +20,12 @@ export class MyAnimatedBird extends CGFobject{
         this.scaleFactor = 1;
         this.speedFactor = 1;
 
+        
         this.egg = new MyBirdEgg(scene,30,20);
 
         this.eggs = [];
 
-        this.eggs.push(this.egg);
+        //this.eggs.push(this.egg);
         //Diving
         this.lowering = false;
         this.rising = false;
@@ -99,6 +100,13 @@ export class MyAnimatedBird extends CGFobject{
       }
     }
 
+    add_egg(egg){
+      console.log("Eggs1: " + this.eggs)
+      console.log("Added Egg: " + egg)
+      this.eggs.push(egg);
+      console.log("Eggs2: " + this.eggs)
+    }
+
     display()
     {
         this.scene.pushMatrix();
@@ -106,7 +114,6 @@ export class MyAnimatedBird extends CGFobject{
         this.scene.translate(this.position[0],this.position[1] + this.animVal*2,this.position[2]);
         this.scene.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
         this.scene.rotate(this.rotationAngle,0,1,0);
-
         if (this.eggs.length > 0){
           this.eggs[0].setCoordinates(0,0,0);
           this.eggs[0].display();
@@ -154,5 +161,13 @@ export class MyAnimatedBird extends CGFobject{
 
     resetRotation(){ //For testing purposes only
       this.rotationAngle = 0;
+    }
+
+    hasEgg(){
+      var count = 0
+      for(var egg in this.eggs){
+        count++
+      }
+      return count > 0
     }
 }

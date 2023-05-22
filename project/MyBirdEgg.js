@@ -8,19 +8,22 @@ import { MySphere } from './MySphere.js';
  * @param stacks - Reference to the number of stacks
  */
 export class MyBirdEgg extends CGFobject {
-	constructor(scene, slices, stacks) {
+	constructor(scene, slices, stacks, isPicked = false) {
 		super(scene);
 
         this.egg = new MySphere(scene, slices, stacks);
 
         this.initMaterials();
-
-        this.x = this.getRandomIntInclusive(85, 115);
-
-        this.z = this.getRandomIntInclusive(-15,-6);
-
-        this.y = -62.5; // Reference value for the height of the highplane + center os the egg
-
+        if(isPicked){
+            this.x = 0;
+            this.y = 0;
+            this.z = 0;
+        }
+        else{
+            this.x = this.getRandomIntInclusive(85, 115);
+            this.z = this.getRandomIntInclusive(-15,-6);
+            this.y = -62.5; // Reference value for the height of the highplane + center os the egg
+        }
         this.angle_rot = this.getRandomIntInclusive(0, 360);
 
     }
