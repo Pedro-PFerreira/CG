@@ -307,6 +307,16 @@ export class MyScene extends CGFscene {
       this.bird.trigger_dive();
       keysPressed=true;
     }
+    if (this.gui.isKeyPressed("KeyO")){
+      text+= " O ";
+
+      keysPressed=true;
+    }
+
+    if (!keysPressed)
+      //text += "None";
+      //console.log(text);
+      this.bird.slow();
     else {
       //console.log(text);
     }

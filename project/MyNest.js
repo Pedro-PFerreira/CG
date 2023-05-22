@@ -14,8 +14,14 @@ export class MyNest extends CGFobject {
 
         this.nest = new MySemiCircle(scene, slices, stacks);
 
+        this.eggs = [];
+
         this.initMaterials();
 
+    }
+
+    addEggs(egg){
+        this.eggs.push(egg);
     }
 
     /**
@@ -42,6 +48,10 @@ export class MyNest extends CGFobject {
         this.scene.rotate(-Math.PI/2, 1,0,0,0);
         this.scene.translate(25, 5., -20);
         this.nestTexture.apply();
+        for (let i = 0; i < this.eggs.length; i++){
+            this.eggs[i].setCoordinates(47+ i,-62,2 + i);
+        }
+
         this.nest.display();
         this.scene.popMatrix();
     }
