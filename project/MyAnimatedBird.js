@@ -1,7 +1,12 @@
 import { CGFobject } from "../lib/CGF.js";
 import {MyBird} from "./MyBird.js";
 import { MyBirdEgg } from "./MyBirdEgg.js";
-
+/**
+ * MyAnimatedBird
+ * @constructor
+ * @param {MyScene} scene - Reference to MyScene object
+ * @param {Array} textures - Array of textures
+ */
 export class MyAnimatedBird extends CGFobject{
     constructor(scene, textures) {
         super(scene);
@@ -31,7 +36,12 @@ export class MyAnimatedBird extends CGFobject{
         this.rising = false;
     }
 
-
+    /**
+     * This updates the object constantly based on time since the app started
+     * @param {int} timeSinceAppStart Time since the Application Started
+     * @param {int} scaleFactor Variable Scale Factor adjustable by the user in the interface
+     * @param {int} speedFactor Variable Speed Factor adjustable by the user in the interface
+     */
     update(timeSinceAppStart, scaleFactor, speedFactor){
         this.scaleFactor = scaleFactor;
         this.speedFactor = speedFactor;
@@ -70,15 +80,23 @@ export class MyAnimatedBird extends CGFobject{
 
         this.obj.update(timeSinceAppStart, this.speedFactor);
     }
-
+    /**
+     * This switches between the two behaviors: accelerating and standing still
+     * @param {boolean} v True to enable acceleration, False otherwise 
+     */
     toggle_acceleration(v){
       this.accelerating = v;
     }
-
+    /**
+     * This triggers the diving animation and movement
+     */
     trigger_dive(){
       this.lowering = true;
     }
-
+    /**
+     * This triggers the rising movement during the dive animation
+     * @param {int} v How much to increment bird's height in a single update call
+     */
     rise(v){
       if(this.position[1] + v < -50){
         this.position[1] += v;
@@ -88,7 +106,10 @@ export class MyAnimatedBird extends CGFobject{
         this.rising = false;
       }
     }
-
+    /**
+     * This triggers the diving movement during the dive animation and then transitions to rising
+     * @param {int} v How much to decrement bird's height in a single update call
+     */
     lower(v){
       if(this.position[1] - v > -62.5){
         this.position[1] -= v;
@@ -99,14 +120,19 @@ export class MyAnimatedBird extends CGFobject{
         this.rising = true;
       }
     }
-
+    /**
+     * This adds an egg to the list of eggs held by the bird
+     * @param {MyBirdEgg} egg Egg Object to be added 
+     */
     add_egg(egg){
       console.log("Eggs1: " + this.eggs)
       console.log("Added Egg: " + egg)
       this.eggs.push(egg);
       console.log("Eggs2: " + this.eggs)
     }
-
+    /**
+     * This displays the Animated Bird Object accounting values for animation transformations
+     */
     display()
     {
         this.scene.pushMatrix();
@@ -122,7 +148,11 @@ export class MyAnimatedBird extends CGFobject{
         this.obj.display();
         this.scene.popMatrix();
     }
-
+    /**
+     * This normalizes a given angle to a value between 0 and 2*PI Radians
+     * @param {int} angle Angle to be normalized (in radians)
+     * @returns 
+     */
     normalize_angle(angle){
       while (angle >= Math.PI * 2){
         angle -= Math.PI * 2;
@@ -132,7 +162,9 @@ export class MyAnimatedBird extends CGFobject{
       }
       return angle;
     }
-
+    /**
+     * This normalizes the position vector to a vector with length = 1
+     */
     normalize_position(){
 
       var magnitude = Math.sqrt(this.position[0]*this.position[0] + this.position[1]*this.position[1] + this.position[2]*this.position[2]);
@@ -143,26 +175,38 @@ export class MyAnimatedBird extends CGFobject{
       }
       console.log("Position vector:" + this.position);
     }
-
+    /**
+     * This rotates the bird right or left
+     * @param {int} v Angle of Rotation 
+     */
     turn(v){
       this.rotationAngle += v * this.speedFactor;
     }
-
+    /**
+     * This accelerates the bird, making it move forward
+     */
     accelerate(){
       this.position[2] -= Math.sin(this.rotationAngle) * this.speedFactor; //z
       this.position[0] += Math.cos(this.rotationAngle) * this.speedFactor; //x
     }
-
+    /**
+     * This resets the bird position
+     */
     resetPos(){
       this.position = [0,0,0];
       this.rotationAngle = 0;
       this.accelerating = false;
     }
-
+    /**
+     * This resets the rotation of the bird to rotation angle = 0
+     */
     resetRotation(){ //For testing purposes only
       this.rotationAngle = 0;
     }
-
+    /**
+     * This checks if the bird is carrying an egg
+     * @returns True if it is, False otherwise
+     */
     hasEgg(){
       var count = 0
       for(var egg in this.eggs){

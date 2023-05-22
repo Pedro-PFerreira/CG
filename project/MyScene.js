@@ -315,12 +315,12 @@ export class MyScene extends CGFscene {
       text+=" R ";
       this.bird.resetPos();
       keysPressed=true;
-    }
+    }/**
     if (this.gui.isKeyPressed("KeyT")) { //For testing purposes only
       text+=" T ";
       this.bird.resetRotation();
       keysPressed=true;
-    }
+    }*/
     if (this.gui.isKeyPressed("KeyP")){
       text+=" P ";
       this.bird.trigger_dive();

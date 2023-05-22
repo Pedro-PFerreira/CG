@@ -9,6 +9,7 @@ import { MyTail } from "./MyTail.js";
  * MyBird
  * @constructor
  * @param scene - Reference to MyScene object
+ * @param textures - Array of textures
  */
 export class MyBird extends CGFobject{
     constructor(scene, textures) {
