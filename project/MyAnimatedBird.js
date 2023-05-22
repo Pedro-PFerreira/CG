@@ -36,30 +36,20 @@ export class MyAnimatedBird extends CGFobject{
           this.animVal = 1 - this.elapsedTimeSecs;
         }
 
-        this.rotationAngle = this.normalize_angle(this.rotationAngle);
+        //this.rotationAngle = this.normalize_angle(this.rotationAngle);
 
         console.log(this.rotationAngle * 180 / Math.PI);
 
-        if(this.rotationAngle >= 0 && this.rotationAngle <= Math.PI/2){
-          this.position[2] += Math.sin(this.rotationAngle); //z
-        }
-        else{
-          this.position[2] -= Math.sin(this.rotationAngle); //z
-        }
+        this.position[2] -= Math.sin(this.rotationAngle); //z
+        this.position[0] += Math.cos(this.rotationAngle); //x
 
-        if(this.rotationAngle >= Math.PI/2 && this.rotationAngle <= 3*Math.PI/2){
-          this.position[0] -= Math.cos(this.rotationAngle); //x
-        }
-        else{
-          this.position[0] += Math.cos(this.rotationAngle); //x
-        }
         console.log("HERE:" + this.position);
         console.log("HERE:" + this.rotationAngle);
 
-        this.normalize_position();
-        this.position[0] = this.position[0] * this.moveSpeed;
-        this.position[1] = this.position[1] * this.moveSpeed;
-        this.position[2] = this.position[2] * this.moveSpeed;
+        //this.normalize_position();
+        this.position[0] = this.position[0] //* this.moveSpeed;
+        this.position[1] = this.position[1] //* this.moveSpeed;
+        this.position[2] = this.position[2] //* this.moveSpeed;
         
         console.log("moveSpeed: " + this.moveSpeed);
 
@@ -88,6 +78,7 @@ export class MyAnimatedBird extends CGFobject{
     }
 
     normalize_position(){
+
       var magnitude = Math.sqrt(this.position[0]*this.position[0] + this.position[1]*this.position[1] + this.position[2]*this.position[2]);
       if(magnitude != 0){
         this.position[0] = this.position[0]/magnitude;
