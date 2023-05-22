@@ -43,10 +43,7 @@ export class MyBillboard extends CGFobject {
         this.billboardTexture3.setEmission(1,1,1,1);
         this.billboardTexture3.setShininess(20.0);
         this.billboardTexture3.loadTexture('images/billboardtree_3.png');
-        this.billboardTexture3.setTextureWrap('REPEAT', 'REPEAT');
-
-        this.height_texture = new CGFtexture(this.scene, "images/heightmap_modified_2.jpg");
-        
+        this.billboardTexture3.setTextureWrap('REPEAT', 'REPEAT');        
     }
 
     /**

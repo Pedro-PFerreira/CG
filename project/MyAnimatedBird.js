@@ -1,5 +1,6 @@
 import { CGFobject } from "../lib/CGF.js";
 import {MyBird} from "./MyBird.js";
+import { MyBirdEgg } from "./MyBirdEgg.js";
 
 export class MyAnimatedBird extends CGFobject{
     constructor(scene, textures) {
@@ -19,10 +20,16 @@ export class MyAnimatedBird extends CGFobject{
         this.scaleFactor = 1;
         this.speedFactor = 1;
 
+        this.egg = new MyBirdEgg(scene,30,20);
+
+        this.eggs = [];
+
+        this.eggs.push(this.egg);
         //Diving
         this.lowering = false;
         this.rising = false;
     }
+
 
     update(timeSinceAppStart, scaleFactor, speedFactor){
         this.scaleFactor = scaleFactor;
@@ -41,8 +48,6 @@ export class MyAnimatedBird extends CGFobject{
         }
 
         //this.rotationAngle = this.normalize_angle(this.rotationAngle);
-
-
         if(this.accelerating){
           this.accelerate();
         }
@@ -101,6 +106,12 @@ export class MyAnimatedBird extends CGFobject{
         this.scene.translate(this.position[0],this.position[1] + this.animVal*2,this.position[2]);
         this.scene.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
         this.scene.rotate(this.rotationAngle,0,1,0);
+
+        if (this.eggs.length > 0){
+          this.eggs[0].setCoordinates(0,0,0);
+          this.eggs[0].display();
+        }
+
         this.obj.display();
         this.scene.popMatrix();
     }
