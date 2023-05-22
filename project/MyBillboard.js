@@ -75,7 +75,7 @@ export class MyBillboard extends CGFobject {
 
         camera_pos = [camera_pos[0] / magnitude, 0, camera_pos[2] / magnitude];
 
-        let angle = Math.acos((vec3.dot(quad_normals, camera_pos))* (Math.PI/180));
+        let angle = Math.acos((vec3.dot(quad_normals, camera_pos)));
         let rot_axis = [0,0,1];
 
         vec3.cross(rot_axis, quad_normals, camera_pos);

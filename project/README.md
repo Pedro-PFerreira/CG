@@ -2,6 +2,13 @@
 
 ## Group T01G01
 
+### Members: 
+
+| Name             | Number    | E-Mail             |
+| ---------------- | --------- | ------------------ |
+| Pedro Manuel Costa Aguiar Botelho Gomes  | 202006086 | up202006086@edu.fe.up.pt    |
+| Pedro Pereira Ferreira         | 202004986| up202004986@edu.fe.up.pt                |
+
 ## Project
 
 ### Phase 1 - Creating a Sphere
@@ -87,3 +94,8 @@
 - We displayed them in our panorama and we noticed also that we had to resize our highplane, so every elements of the world could be visible. Here is the final result:
 
 ![Trees](./screenshots/project-t01g01-5.png)
+
+
+## What was not done:
+
+- Unfortunately, we could not do egg drop and also the additional development at time.
