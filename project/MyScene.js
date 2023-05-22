@@ -106,6 +106,7 @@ export class MyScene extends CGFscene {
     //Objects conn´ected to MyInterface
     this.displayAxis = false;
     this.scaleFactor = 1;
+    this.speedFactor = 1;
     this.selectedObject = 2;
     this.displayObject = true;
     this.displayNormals = false;
@@ -139,11 +140,11 @@ export class MyScene extends CGFscene {
       0.1,
       1000,
       //CAMERA VALUES FOR TESTING BIRD
-      vec3.fromValues(10,2,3),
-      vec3.fromValues(0,0,0)
+      //vec3.fromValues(10,2,3),
+      //vec3.fromValues(0,0,0)
       //CORRECT VALUES BELOW
-      //vec3.fromValues(50, 10, 15),
-      //vec3.fromValues(0, 0, 0)
+      vec3.fromValues(50, 10, 15),
+      vec3.fromValues(0, 0, 0)
     );
   }
   setDefaultAppearance() {
@@ -175,6 +176,7 @@ export class MyScene extends CGFscene {
 
     //Draw Head
     if (this.selectedObject == 3){
+      this.setActiveShader(this.defaultShader);
       this.bird.display();
       this.panorama.display();
     }
@@ -258,7 +260,57 @@ export class MyScene extends CGFscene {
 
   update(t){
     var timeSinceAppStart= (t-this.appStartTime)/1000.0; //in seconds
-    this.bird.update(timeSinceAppStart);
+    this.bird.update(timeSinceAppStart, this.scaleFactor, this.speedFactor);
     this.bird.display();
+    this.checkKeys();
   }
+
+  checkKeys(){
+    var text = "Keys pressed: ";
+    var keysPressed = false;
+
+    // Check for key codes e.g. in https://keycode.info/
+    if (this.gui.isKeyPressed("KeyW")) {
+      text+=" W ";
+      this.bird.toggle_acceleration(true);
+      keysPressed=true;
+    }
+    if (this.gui.isKeyPressed("KeyS")) {
+      text+=" S ";
+      this.bird.toggle_acceleration(false);
+      keysPressed=true;
+    }
+    if (this.gui.isKeyPressed("KeyA")) {
+      text+=" A ";
+      this.bird.turn(Math.PI/8);
+      keysPressed=true;
+    }
+    if (this.gui.isKeyPressed("KeyD")) {
+      text+=" D ";
+      this.bird.turn(-Math.PI/8);
+      keysPressed=true;
+    }
+    if (this.gui.isKeyPressed("KeyR")) {
+      text+=" R ";
+      this.bird.resetPos();
+      keysPressed=true;
+    }
+    if (this.gui.isKeyPressed("KeyT")) { //For testing purposes only
+      text+=" T ";
+      this.bird.resetRotation();
+      keysPressed=true;
+    }
+    if (this.gui.isKeyPressed("KeyP")){
+      text+=" T ";
+      //IMPLEMENT DIVE
+      keysPressed=true;
+    }
+    if (!keysPressed)
+      //text += "None";
+      //console.log(text);
+      this.bird.slow();
+    else {
+      //console.log(text);
+    }
+    }
 }
