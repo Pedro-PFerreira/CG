@@ -3,8 +3,8 @@
 ## Group T01G01
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
-| Pedro Manuel Costa Aguiar Botelho Gomes  | 202006086 | up202006086@edu.fe.up.pt    |
-| Pedro Pereira Ferreira         | 202004986| up202004986@edu.fe.up.pt                |
+| [Pedro Manuel Costa Aguiar Botelho Gomes](https://github.com/Pedro-CAB)  | 202006086 | up202006086@edu.fe.up.pt    |
+| [Pedro Pereira Ferreira](https://github.com/Pedro-PFerreira/)         | 202004986| up202004986@edu.fe.up.pt                |
 
 ----
 
